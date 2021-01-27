@@ -16,6 +16,9 @@ import { Error404NotFoundComponent } from './error404-not-found/error404-not-fou
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { StudentsComponent } from './students/students.component';
+import { StudentSearchPipe } from './pipes/student-search.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { StudentsComponent } from './students/students.component';
     Error404NotFoundComponent,
     HeaderComponent,
     LoginComponent,
-    StudentsComponent
+    StudentsComponent,
+    StudentSearchPipe
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,7 @@ import { StudentsComponent } from './students/students.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(), // ToastrModule added
     FontAwesomeModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

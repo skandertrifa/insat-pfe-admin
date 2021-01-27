@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Student } from '../models/student';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-students',
@@ -7,15 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentsComponent implements OnInit {
 
-  constructor() { }
+  students: Student[];
+  searchString= "";
+  constructor(
+    private studentService: StudentService
+  ) { }
 
   ngOnInit(): void {
-    window.addEventListener('load', function load() {
-      const loader = document.getElementById('loader');
-      setTimeout(function() {
-        loader.classList.add('fadeOut');
-      }, 300);
-    });
+    this.studentService.getStudents().subscribe(
+      (response) => {
+        console.log(response);
+        this.students = response;
+        console.log(this.students);
+      }
+    );
+    //console.log(this.students);
+
+
   }
 
 }

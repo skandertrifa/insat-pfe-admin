@@ -8,6 +8,7 @@ import { MainComponent } from './main/main.component';
 import { StudentsComponent } from './students/students.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/Dashbord', pathMatch: 'full'},
   {
     path:'',
     component: MainComponent,
