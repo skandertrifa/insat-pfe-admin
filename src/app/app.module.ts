@@ -18,7 +18,11 @@ import { LoginComponent } from './login/login.component';
 import { StudentsComponent } from './students/students.component';
 import { StudentSearchPipe } from './pipes/student-search.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 
 @NgModule({
@@ -31,7 +35,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HeaderComponent,
     LoginComponent,
     StudentsComponent,
-    StudentSearchPipe
+    StudentSearchPipe,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     BrowserAnimationsModule,
     ToastrModule.forRoot(), // ToastrModule added
     FontAwesomeModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule,
+    FlatpickrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

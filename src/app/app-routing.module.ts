@@ -1,3 +1,4 @@
+import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashbordComponent } from './dashbord/dashbord.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'Dashbord', component: DashbordComponent },
       { path: 'Students', component: StudentsComponent },
+      { path: 'Calendar', component: CalendarComponent },
     ],
  },
  { path:'Login', component: LoginComponent },
