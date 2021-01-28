@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-left-side-bar',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftSideBarComponent implements OnInit {
 
-  constructor() { }
+  
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
   }
 
+  closeSidebar(){
+    this.renderer.addClass(document.body, 'app');
+    this.renderer.removeClass(document.body, 'is-collapsed');
+  }
 }
