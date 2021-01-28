@@ -23,6 +23,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { CommonModule } from '@angular/common';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 
 @NgModule({
@@ -36,11 +38,12 @@ import { FlatpickrModule } from 'angularx-flatpickr';
     LoginComponent,
     StudentsComponent,
     StudentSearchPipe,
-    CalendarComponent
+    CalendarComponent,
+    SoutenanceComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -50,7 +53,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
     Ng2SearchPipeModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     NgbModule,
-    FlatpickrModule.forRoot()
+    FlatpickrModule.forRoot(),
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

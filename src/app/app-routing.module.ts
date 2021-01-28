@@ -7,6 +7,7 @@ import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { StudentsComponent } from './students/students.component';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Dashbord', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: 'Dashbord', component: DashbordComponent },
       { path: 'Students', component: StudentsComponent },
+      { path: 'Soutenance', component: SoutenanceComponent },
       { path: 'Calendar', component: CalendarComponent },
     ],
  },
