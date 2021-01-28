@@ -102,7 +102,7 @@
                           }
                   "
                 > -->
-                <tr *ngFor="let soutenance of soutenances | filter: searchString">
+                <tr *ngFor="let soutenance of soutenances.items | filter: searchString">
                   <td>{{ soutenance?.titre }}</td>
                   <td>{{ soutenance?.dateDePassage }}</td>
                   <td>{{ soutenance?.session?.annee?.annee }}</td>
@@ -137,16 +137,32 @@
             </table>
             <nav aria-label="Page navigation example">
               <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#">Précedent</a>
+                <li class="page-item clickable" *ngIf="page>1">
+                  <a class="page-link" (click)="setPage(page-1)">Précedent</a>
                 </li>
+                
+                
+                  <li class="page-item clickable" *ngIf="page>2">
+                    <a class="page-link" (click)="setPage(page-2)"> 
+                      {{page-2}}
+                    </a></li>
+                    <li class="page-item clickable" *ngIf="page>1">
+                      <a class="page-link" (click)="setPage(page-1)"> 
+                        {{page-1}}
+                      </a></li>
                 <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
+                  <a class="page-link" >{{page}}</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Suivant</a>
+                <li class="page-item clickable" *ngIf="page+1<=soutenances.totalPages">
+                  <a class="page-link" (click)="setPage(page+1)"> 
+                    {{page+1}}
+                  </a></li>
+                  <li class="page-item clickable" *ngIf="page+2<=soutenances.totalPages">
+                    <a class="page-link" (click)="setPage(page+2)"> 
+                      {{page+2}}
+                    </a></li>
+                <li class="page-item clickable">
+                  <a class="page-link" (click)="setPage(page+1)" *ngIf="page+1<=soutenances.totalPages">Suivant</a>
                 </li>
               </ul>
             </nav>

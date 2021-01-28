@@ -1,6 +1,21 @@
 import { Enseignant } from "src/app/models/enseignant";
 import { TimeStamp } from "src/app/models/timeStamp";
 
+export class PaginationMeta{
+  currentPage: number
+  itemsPerPage: number
+  totalPages: number
+
+}
+
+
+export class Soutenances extends PaginationMeta{
+  items: Soutenance[]
+
+
+
+
+}
 
 export class Soutenance extends TimeStamp{
     

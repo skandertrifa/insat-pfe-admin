@@ -32,6 +32,7 @@
     "flatpickr": "^4.6.9",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^3.1.2",
+    "nestjs-typeorm-paginate": "^2.3.1",
     "ng2-search-filter": "^0.5.1",
     "ngx-skycons": "^1.2.2",
     "ngx-toastr": "^13.2.0",

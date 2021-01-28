@@ -1,6 +1,6 @@
 
-import { Component, OnInit } from '@angular/core';
-import { Soutenance } from './models/soutenance';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Soutenance, Soutenances } from './models/soutenance';
 import { SoutenanceService } from './services/soutenance.service';
 
 
@@ -9,24 +9,41 @@ import { SoutenanceService } from './services/soutenance.service';
   templateUrl: './soutenance.component.html',
   styleUrls: ['./soutenance.component.css']
 })
-export class SoutenanceComponent implements OnInit {
+export class SoutenanceComponent implements OnChanges, OnInit {
 
-  soutenances: Soutenance[];
-  searchString= "";
+  soutenances: Soutenances;
+  searchString : string = "";
+  page: number=1
   constructor(
     private soutenanceService: SoutenanceService
   ) { }
 
-  ngOnInit(): void {
-    this.soutenanceService.getSoutenances().subscribe(
+
+  ngOnInit() {
+    this.soutenanceService.getSoutenances(this.page).subscribe(
       (response) => {
         console.log(response);
         this.soutenances = response;
         console.log(this.soutenances);
-      }
-    );
-
-
+      })
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("ngOnChanges is trash change my mind")
+    
+  }
+
+  setPage(page: number=1){
+    this.page=page
+    this.soutenanceService.getSoutenances(this.page).subscribe(
+      (response) => {
+        console.log(response);
+        this.soutenances = response;
+        console.log(this.soutenances);
+      })
+    
+  }
+
+  
 
 }

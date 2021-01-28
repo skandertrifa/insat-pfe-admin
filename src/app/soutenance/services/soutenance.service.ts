@@ -12,7 +12,7 @@ const SOUTENANCE_API = 'http://127.0.0.1:3000/soutenance';
 export class SoutenanceService {
 
   constructor(private http: HttpClient) { }
-  getSoutenances(): Observable<any> {
-    return this.http.get<any>(SOUTENANCE_API);
+  getSoutenances(page : number=1): Observable<any> {
+    return this.http.get<any>(SOUTENANCE_API+`?page=${page}`);
   }
 }
