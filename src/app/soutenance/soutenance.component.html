@@ -106,8 +106,22 @@
                   <td>{{ soutenance?.titre }}</td>
                   <td>{{ soutenance?.dateDePassage }}</td>
                   <td>{{ soutenance?.session?.annee?.annee }}</td>
-                  <td>{{ soutenance?.session.id }}</td>
-                  <td>{{ soutenance?.jury }}</td>
+                  <td>{{ soutenance?.session?.name }}</td>
+                  <td>
+                    <ng-template #popContent>
+                      President : {{soutenance?.jury?.president?.userDetails?.prenom}} {{soutenance?.jury?.president?.userDetails?.nom}}<br>
+                      Membre : {{soutenance?.jury?.members[0]?.userDetails?.prenom}} {{soutenance?.jury?.members[0]?.userDetails?.nom}}<br>
+                      Membre : {{soutenance?.jury?.members[1]?.userDetails?.prenom}} {{soutenance?.jury?.members[1]?.userDetails?.nom}}
+                    </ng-template>
+                    <button *ngIf="soutenance.jury"
+                    type="button" class="btn btn-outline-secondary" popoverTitle="details jury"
+                    [autoClose]="true" 
+                    [ngbPopover]="popContent"           
+                    #popover3="ngbPopover">
+                      Details
+                    </button>
+
+                  </td>
                   <td>{{ soutenance?.salle.code }}</td>
                   <td>{{ soutenance?.sujet.titre }}</td>
                 </tr>
