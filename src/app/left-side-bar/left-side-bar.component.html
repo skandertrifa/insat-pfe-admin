@@ -28,8 +28,8 @@
         </div>
         <div class="peer">
           <div class="mobile-toggle sidebar-toggle">
-            <a href="" class="td-n">
-              <i class="ti-arrow-circle-left"></i>
+            <a class="td-n">
+              <i class="ti-arrow-circle-left" style="cursor: pointer;" (click)="closeSidebar()"></i>
             </a>
           </div>
         </div>
@@ -55,6 +55,14 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="sidebar-link" routerLink="/Soutenance">
+          <span class="icon-holder">
+            <i class="c-deep-purple-500 ti-bookmark"></i>
+          </span>
+          <span class="title">Soutenance</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="sidebar-link" href="email.html">
           <span class="icon-holder">
             <i class="c-brown-500 ti-email"></i>
@@ -71,7 +79,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="sidebar-link" href="calendar.html">
+        <a class="sidebar-link" routerLink="/Calendar">
           <span class="icon-holder">
             <i class="c-deep-orange-500 ti-calendar"></i>
           </span>

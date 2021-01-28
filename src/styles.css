@@ -3,6 +3,8 @@
 @import "~ngx-toastr/toastr";
 @import "~bootstrap";
 @import "~font-awesome";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import 'flatpickr/dist/flatpickr.css';
 
 #loader {
   transition: all 0.3s ease-in-out;
@@ -333,9 +335,7 @@ svg {
 .datepicker table tr td.today.disabled:hover:active,
 .datepicker table tr td.today:active,
 .datepicker table tr td.today:hover.active,
-.datepicker table tr td.today:hover:active {
-  background-color: #fbf069\9;
-}
+
 .datepicker table tr td.today:hover:hover {
   color: #000;
 }
@@ -406,9 +406,7 @@ svg {
 .datepicker table tr td.range.today.disabled:hover:active,
 .datepicker table tr td.range.today:active,
 .datepicker table tr td.range.today:hover.active,
-.datepicker table tr td.range.today:hover:active {
-  background-color: #efe24b\9;
-}
+
 .datepicker table tr td.selected,
 .datepicker table tr td.selected.disabled,
 .datepicker table tr td.selected.disabled:hover,
@@ -463,9 +461,7 @@ svg {
 .datepicker table tr td.selected.disabled:hover:active,
 .datepicker table tr td.selected:active,
 .datepicker table tr td.selected:hover.active,
-.datepicker table tr td.selected:hover:active {
-  background-color: #666\9;
-}
+
 .datepicker table tr td.active,
 .datepicker table tr td.active.disabled,
 .datepicker table tr td.active.disabled:hover,
@@ -514,9 +510,7 @@ svg {
 .datepicker table tr td.active.disabled:hover:active,
 .datepicker table tr td.active:active,
 .datepicker table tr td.active:hover.active,
-.datepicker table tr td.active:hover:active {
-  background-color: #039\9;
-}
+
 .datepicker table tr td span {
   display: block;
   width: 23%;
@@ -587,9 +581,7 @@ svg {
 .datepicker table tr td span.active.disabled:hover:active,
 .datepicker table tr td span.active:active,
 .datepicker table tr td span.active:hover.active,
-.datepicker table tr td span.active:hover:active {
-  background-color: #039\9;
-}
+
 .datepicker table tr td span.new,
 .datepicker table tr td span.old {
   color: #999;

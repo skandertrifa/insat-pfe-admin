@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, Renderer2, Inject } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -12,10 +13,12 @@ export class HeaderComponent implements OnInit {
   email: '';
   nom: '';
   prenom: '';
-
+  sidebarActive=false
   constructor(
     private authService: AuthService,
     private router: Router,
+    private renderer:Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +35,18 @@ export class HeaderComponent implements OnInit {
   handleLogout(){
     this.authService.logout();
     this.router.navigate(['Login']);
+  }
+  
+  changeSidebar(){
+    if (!this.document.body.classList.contains('is-collapsed'))
+    {
+      this.renderer.addClass(document.body, 'app');
+      this.renderer.addClass(document.body, 'is-collapsed');
+    }
+    else {
+      this.renderer.addClass(document.body, 'app');
+      this.renderer.removeClass(document.body, 'is-collapsed');
+    }
   }
 
 }
