@@ -1,3 +1,5 @@
+import { AfficherSoutenancesComponent } from './soutenance/afficher-soutenances/afficher-soutenances.component';
+import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -7,7 +9,7 @@ import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { StudentsComponent } from './students/students.component';
-import { SoutenanceComponent } from './soutenance/soutenance.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/Dashbord', pathMatch: 'full'},
@@ -18,12 +20,16 @@ const routes: Routes = [
     children: [
       { path: 'Dashbord', component: DashbordComponent },
       { path: 'Students', component: StudentsComponent },
-      { path: 'Soutenance', component: SoutenanceComponent },
+      { path: 'Soutenance', loadChildren: () => import('./soutenance/soutenance.module')
+      .then(m => m.SoutenanceModule), },
+      
+      
       { path: 'Calendar', component: CalendarComponent },
     ],
- },
- { path:'Login', component: LoginComponent },
- { path:'**', component: Error404NotFoundComponent }
+  },
+ 
+  { path:'Login', component: LoginComponent },
+  { path:'**', component: Error404NotFoundComponent }
 ];
 
 @NgModule({

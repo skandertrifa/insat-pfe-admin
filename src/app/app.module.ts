@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { LeftSideBarComponent } from './left-side-bar/left-side-bar.component';
 import { MainComponent } from './main/main.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
-import { SkyconsModule } from 'ngx-skycons';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Error404NotFoundComponent } from './error404-not-found/error404-not-found.component';
 import { HeaderComponent } from './header/header.component';
@@ -24,7 +24,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CommonModule } from '@angular/common';
-import { SoutenanceComponent } from './soutenance/soutenance.component';
+
 
 
 @NgModule({
@@ -39,7 +39,8 @@ import { SoutenanceComponent } from './soutenance/soutenance.component';
     StudentsComponent,
     StudentSearchPipe,
     CalendarComponent,
-    SoutenanceComponent,
+    
+    
   ],
   imports: [
     CommonModule,

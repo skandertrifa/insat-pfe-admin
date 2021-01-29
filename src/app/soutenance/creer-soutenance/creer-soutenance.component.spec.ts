@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SoutenanceComponent } from './soutenance.component';
+import { CreerSoutenanceComponent } from './creer-soutenance.component';
 
-describe('SoutenanceComponent', () => {
-  let component: SoutenanceComponent;
-  let fixture: ComponentFixture<SoutenanceComponent>;
+describe('CreerSoutenanceComponent', () => {
+  let component: CreerSoutenanceComponent;
+  let fixture: ComponentFixture<CreerSoutenanceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SoutenanceComponent ]
+      declarations: [ CreerSoutenanceComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SoutenanceComponent);
+    fixture = TestBed.createComponent(CreerSoutenanceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
