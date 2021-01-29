@@ -14,4 +14,8 @@ export class StudentService {
   getStudents(): Observable<any> {
     return this.http.get<any>(AUTH_API);
   }
+
+  getStudentsPaginated(page: number,limit: number): Observable<any> {
+    return this.http.get<any>(AUTH_API+ "/paginate?page=" + page + "&limit=" + limit);
+  }
 }
