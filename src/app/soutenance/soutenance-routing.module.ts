@@ -1,9 +1,9 @@
 import { SoutenanceComponent } from './soutenance.component';
-import { ModifierSoutenanceComponent } from './modifier-soutenance/modifier-soutenance.component';
+import { ModifierSoutenanceComponent } from './components/modifier-soutenance/modifier-soutenance.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AfficherSoutenancesComponent } from './afficher-soutenances/afficher-soutenances.component';
-import { CreerSoutenanceComponent } from './creer-soutenance/creer-soutenance.component';
+import { AfficherSoutenancesComponent } from './components/afficher-soutenances/afficher-soutenances.component';
+import { CreerSoutenanceComponent } from './components/creer-soutenance/creer-soutenance.component';
 
 
 

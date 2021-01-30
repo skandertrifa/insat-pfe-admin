@@ -6,7 +6,7 @@
 <main class="main-content bgc-grey-100">
   <div id="mainContent">
     <div class="container-fluid">
-      <h4 class="c-grey-900 mT-10 mB-30">Tableau</h4>
+      
       <div class="row">
         <div class="col-md-12">
           <div class="bgc-white bd bdrs-3 p-20 mB-20">
@@ -43,22 +43,17 @@
                   </select> -->
                 </div>
                 <div class="col-md-4 offset-md-4">
-                  <!-- <div id="dataTable_filter" class="dataTables_filter">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"
-                          ><i class="fa fa-search" aria-hidden="true"></i
-                        ></span>
-                      </div>
-                      <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Search"
-                        placeholder="Recherche d'un etudiant"
-                        [(ngModel)]="searchString"
-                      />
-                    </div>
-                  </div> -->
+                  
+                    <!-- Right side put something here ! -->
+                    <button
+                      placeholder="Ajouter un etudiant"
+                      class="btn btn-primary"
+                      routerLink="creer"
+                      >
+                      Creer une soutenance 
+                      
+                    </button>
+                  
                 </div>
               </div>
             </div>
@@ -103,7 +98,7 @@
                   "
                 > -->
                 <tr *ngFor="let soutenance of soutenances.items | filter: searchString">
-                  <td><a > {{ soutenance?.titre }} </a></td>
+                  <td><a routerLink="modifier/{{soutenance?.id}}"> {{ soutenance?.titre }} </a></td>
                   <td>{{ soutenance?.dateDePassage }}</td>
                   <td>{{ soutenance?.session?.annee?.annee }}</td>
                   <td>{{ soutenance?.session?.name }}</td>
@@ -166,6 +161,7 @@
                 </li>
               </ul>
             </nav>
+            
           </div>
         </div>
       </div>

@@ -1,5 +1,3 @@
-import { AfficherSoutenancesComponent } from './soutenance/afficher-soutenances/afficher-soutenances.component';
-import { SoutenanceComponent } from './soutenance/soutenance.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

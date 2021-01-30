@@ -1,7 +1,7 @@
 
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import {  Soutenances } from '../models/soutenance';
-import { SoutenanceService } from '../services/soutenance.service';
+import {  Soutenances } from 'src/app/soutenance/models/soutenance';
+import { SoutenanceService } from 'src/app/soutenance/services/soutenance.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { SoutenanceService } from '../services/soutenance.service';
 })
 export class AfficherSoutenancesComponent implements  OnInit {
 
-  soutenances: Soutenances;
+  soutenances: Soutenances=null;
   searchString : string = "";
   page: number=1
   constructor(
