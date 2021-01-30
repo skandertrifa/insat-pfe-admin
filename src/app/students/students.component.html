@@ -31,17 +31,27 @@
                       />
                     </div>
                   </div>
-                  <!-- <select
+                  <br />
+                  <h5 style="color: rgb(31, 31, 31)">
+                    Nombre d'etudiants pas page
+                  </h5>
+
+                  <select
                     name="dataTable_length"
                     aria-controls="dataTable"
                     class="custom-select"
-                    id="inputGroupSelect01"
+                    id="selectedLimit"
+                    [(ngModel)]="selectedLimit"
+                    (ngModelChange)="onChange($event)"
                   >
-                    <option value="10" selected>10</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
-                  </select> -->
+                  </select>
                 </div>
                 <!-- <div class="col-md-4 offset-md-4"> -->
                 <div class="col-3">
@@ -343,38 +353,81 @@
                 </tr> -->
               </tbody>
             </table>
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" [href]="previousPage">Précedent</a>
-                </li>
+            <div class="row">
+              <div class="col">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <a
+                        [class.disabled]="previousPage === '' ? true : null"
+                        (click)="checkPreviousPage($event)"
+                        class="page-link"
+                        [routerLink]="['../Students']"
+                        [queryParams]="{ page: currentPage + -1 }"
+                        queryParamsHandling="merge"
+                        >Précedent</a
+                      >
+                    </li>
 
-                <li
-                  class="page-item"
-                  *ngFor="let page of tableIndexPage; let i = index"
-                  [ngClass]="currentPage === i + 1 ? 'active' : ''"
-                >
-                  <a
+                    <li
+                      class="page-item"
+                      *ngFor="let page of tableIndexPage; let i = index"
+                      [ngClass]="currentPage === i + 1 ? 'active' : ''"
+                    >
+                      <a
+                        [class.disabled]="i + 1 === currentPage ? true : null"
+                        (click)="check($event, i + 1)"
+                        class="page-link"
+                        [routerLink]="['../Students']"
+                        [queryParams]="{ page: i + 1 }"
+                        queryParamsHandling="merge"
+                      >
+                        <!-- <a
                     [class.disabled]="i + 1 === currentPage ? true : null"
                     (click)="check($event, i + 1)"
                     class="page-link"
                     [href]="
                       'http://localhost:4200/Students?page=' +
                       (i + 1) +
-                      '&limit=2'
+                      '&limit=' +
+                      selectedLimit
                     "
-                  >
-                    {{ i + 1 }}
-                  </a>
-                </li>
+                  > -->
+                        {{ i + 1 }}
+                      </a>
+                    </li>
 
-                <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                <li class="page-item">
-                  <a class="page-link" [href]="nextPage">Suivant</a>
-                </li>
-              </ul>
-            </nav>
+                    <li class="page-item">
+                      <!-- <a
+                    [class.disabled]="nextPage === '' ? true : null"
+                    (click)="checkNextPage($event)"
+                    class="page-link"
+                    [href]="nextPage"
+                    >Suivant</a
+                  > -->
+                      <a
+                        [class.disabled]="nextPage === '' ? true : null"
+                        (click)="checkNextPage($event)"
+                        class="page-link"
+                        [routerLink]="['../Students']"
+                        [queryParams]="{ page: currentPage + 1 }"
+                        queryParamsHandling="merge"
+                        >Suivant</a
+                      >
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <br />
+              <div style="color: #72777a" class="row-6 mt-2 mr-5">
+                De {{ startItem }}
+                à
+                {{ endItem }}
+                du total {{ totalItems }}
+              </div>
+            </div>
           </div>
         </div>
       </div>

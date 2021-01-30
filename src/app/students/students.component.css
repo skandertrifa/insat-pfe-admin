@@ -67,7 +67,7 @@ td {
     transform: scale(1);
   }
 }
-.disabled {
+a.disabled {
   cursor: default;
+  pointer-events: none;
 }
-

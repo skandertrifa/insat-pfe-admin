@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from '../models/student';
 import { StudentService } from '../services/student.service';
 import {switchMap} from 'rxjs/operators';
@@ -10,6 +10,10 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  selectedLimit: number;
+  startItem : number;
+  endItem : number;
+
   nextPage = "";
   previousPage = "";
   firstPage = "";
@@ -28,14 +32,18 @@ export class StudentsComponent implements OnInit {
   tableIndexPage;
   constructor(
     private studentService: StudentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
+      this.selectedLimit = params.limit;
+
+
       this.studentService.getStudentsPaginated(+params.page,+params.limit).subscribe(
         (response) => {
-          console.log(response.items);
+          console.log(response);
           this.students = response.items;
           //links
           this.firstPage = response.links.first;
@@ -49,7 +57,12 @@ export class StudentsComponent implements OnInit {
           this.totalPages = response.meta.totalPages;
           this.tableIndexPage = new Array(this.totalPages);
           this.currentPage = response.meta.currentPage;
-
+          // start item:
+          this.startItem = (params.page - 1) * this.selectedLimit + 1;
+          // end item
+          this.endItem = params.page * this.selectedLimit > this.totalItems ?
+            this.totalItems:
+            params.page * this.selectedLimit;
       }
     );}
     );}
@@ -61,10 +74,30 @@ export class StudentsComponent implements OnInit {
     handleAddStudentExcel(): void{
       this.modalAddStudentExcel = !this.modalAddStudentExcel;
     }
-    check = (event,x: number) => {
+    check = (event: any,x: number) => {
      if (this.currentPage === x) {
        event.preventDefault();
      }
+    }
+    checkNextPage = (event: any) => {
+     if (this.nextPage === "") {
+       event.preventDefault();
+     }
+    }
+    checkPreviousPage = (event: any) => {
+      if (this.previousPage === "") {
+        event.preventDefault();
+      }
+     }
+    onChange(newValue: any){
+      //this.selectedLimit = newValue;
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { limit: newValue },
+          queryParamsHandling: 'merge'
+        });
     }
 
 
