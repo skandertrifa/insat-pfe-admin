@@ -11,7 +11,7 @@ import { SoutenanceService } from 'src/app/soutenance/services/soutenance.servic
 })
 export class AfficherSoutenancesComponent implements  OnInit {
 
-  soutenances: Soutenances=null;
+  soutenances: Soutenances=new Soutenances();
   searchString : string = "";
   page: number=1
   constructor(

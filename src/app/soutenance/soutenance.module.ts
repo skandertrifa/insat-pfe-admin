@@ -12,11 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
-import { CreerAnneeComponent } from './components/creer-annee/creer-annee.component';
-import { CreerSessionComponent } from './components/creer-session/creer-session.component';
-import { CreerJuryComponent } from './components/creer-jury/creer-jury.component';
-import { CreerSujetComponent } from './components/creer-sujet/creer-sujet.component';
-import { CreerSalleComponent } from './components/creer-salle/creer-salle.component';
+import { AnneeComponent } from './components/annee/annee.component';
 
 
 
@@ -26,11 +22,8 @@ import { CreerSalleComponent } from './components/creer-salle/creer-salle.compon
     ModifierSoutenanceComponent,
     CreerSoutenanceComponent,
     AfficherSoutenancesComponent,
-    CreerAnneeComponent,
-    CreerSessionComponent,
-    CreerJuryComponent,
-    CreerSujetComponent,
-    CreerSalleComponent,
+    AnneeComponent,
+    
     
   ],
   imports: [
