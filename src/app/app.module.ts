@@ -24,7 +24,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CommonModule } from '@angular/common';
-import { SoutenanceComponent } from './soutenance/soutenance.component';
+import { SoutenanceModule } from './soutenance/soutenance.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EventDetailsComponent } from './calendar/event-details/event-details.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -43,7 +43,6 @@ import { MatInputModule } from '@angular/material/input';
     StudentsComponent,
     StudentSearchPipe,
     CalendarComponent,
-    SoutenanceComponent,
     EventDetailsComponent,
   ],
   imports: [
@@ -62,6 +61,7 @@ import { MatInputModule } from '@angular/material/input';
     AppRoutingModule,
     MatDialogModule,
     MatFormFieldModule,
+    SoutenanceModule,
     MatInputModule
   ],
   providers: [],
