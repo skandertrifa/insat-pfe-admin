@@ -114,78 +114,109 @@
                       >
                     </button>
                   </div>
-                  <div class="modal-body">
-                    <!-- inputs are here -->
-                    <label for="exampleFormControlFile1"
-                      >Fichier excel ici</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control-file"
-                      id="exampleFormControlFile1"
-                    />
-                    <br />
-                    <h5>Nom des colonnes dans excel:</h5>
-                    <br />
-                    <label for="Nom"
-                      >Nom de la colonne "Nom" dans le fichier excel</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Nom"
-                      placeholder="Nom"
-                    />
-                    <label for="Prenom"
-                      >Nom de la colonne "prenom" dans le fichier excel</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Prenom"
-                      placeholder="Prénom"
-                    />
-                    <label for="Filiere"
-                      >Nom de la colonne "Filière" dans le fichier excel</label
-                    >
+                  <form #addStudentsExcel="ngForm">
+                    <div class="modal-body">
+                      <!-- inputs are here -->
+                      <label for="exampleFormControlFile1"
+                        >Fichier excel ici</label
+                      >
+                      <input
+                        type="file"
+                        class="form-control-file"
+                        id="exampleFormControlFile1"
+                        name="students"
+                        ngModel
+                        required
+                        #fileInput="ngModel"
+                        (change)="onFileChange($event)"
+                      />
+                      <br />
+                      <h5>Nom des colonnes dans excel:</h5>
+                      <br />
+                      <label for="Nom"
+                        >Nom de la colonne "Nom" dans le fichier excel</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="Nom"
+                        placeholder="Nom"
+                        name="nom"
+                        ngModel
+                        required
+                        #excelNomInput="ngModel"
+                      />
+                      <label for="Prenom"
+                        >Nom de la colonne "prenom" dans le fichier excel</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="Prenom"
+                        placeholder="Prénom"
+                        name="prenom"
+                        ngModel
+                        required
+                        #excelPrenomInput="ngModel"
+                      />
+                      <label for="Filiere"
+                        >Nom de la colonne "Filière" dans le fichier
+                        excel</label
+                      >
 
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Prenom"
-                      placeholder="Prénom"
-                    />
-                    <label for="Email"
-                      >Nom de la colonne "Email" dans le fichier excel</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Email"
-                      placeholder="Email"
-                    />
-                    <label for="CIN"
-                      >Nom de la colonne "CIN" dans le fichier excel</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="CIN"
-                      placeholder="CIN"
-                    />
-                    <label for="idEtudiant"
-                      >Nom de la colonne "idEtudiant" dans le fichier
-                      excel</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="idEtudiant"
-                      placeholder="idEtudiant"
-                    />
-                  </div>
-                  <div class="modal-footer">
-                    <!-- <button
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="Filiere"
+                        placeholder="Filière"
+                        name="filiere"
+                        ngModel
+                        required
+                        #excelFiliereInput="ngModel"
+                      />
+                      <label for="Email"
+                        >Nom de la colonne "Email" dans le fichier excel</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="Email"
+                        placeholder="Email"
+                        name="email"
+                        ngModel
+                        required
+                        #excelEmailInput="ngModel"
+                      />
+                      <label for="CIN"
+                        >Nom de la colonne "CIN" dans le fichier excel</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="CIN"
+                        placeholder="CIN"
+                        name="cin"
+                        ngModel
+                        required
+                        #excelCinInput="ngModel"
+                      />
+                      <label for="idEtudiant"
+                        >Nom de la colonne "idEtudiant" dans le fichier
+                        excel</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="idEtudiant"
+                        placeholder="idEtudiant"
+                        name="idEtudiant"
+                        ngModel
+                        required
+                        #excelIdEtudiantInput="ngModel"
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button
                       type="button"
                       class="btn btn-secondary"
                       data-dismiss="modal"
@@ -193,10 +224,15 @@
                     >
                       Close
                     </button> -->
-                    <button type="button" class="btn btn-primary">
-                      Envoyer
-                    </button>
-                  </div>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="addStudentsExcelForm(addStudentsExcel)"
+                      >
+                        Envoyer
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -238,43 +274,94 @@
                       >
                     </button>
                   </div>
-                  <div class="modal-body">
-                    <!-- inputs are here -->
-                    <label for="Nom">Nom</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Nom"
-                      placeholder="Nom"
-                    />
-                    <label for="Prenom">Prenom</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Prenom"
-                      placeholder="Prénom"
-                    />
-                    <label for="Filiere">Filière</label>
+                  <form #addStudentManually="ngForm">
+                    <div class="modal-body">
+                      <!-- inputs are here -->
+                      <label for="Nom">Nom</label>
+                      <input
+                        ngModel
+                        required
+                        type="text"
+                        class="form-control"
+                        id="Nom"
+                        placeholder="Nom"
+                        name="nom"
+                        #studentNomInput="ngModel"
+                      />
+                      <div
+                        *ngIf="studentNomInput.invalid && studentNomInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        Le nom est obligatoire
+                      </div>
+                      <label for="Prenom">Prenom</label>
+                      <input
+                        ngModel
+                        required
+                        name="prenom"
+                        type="text"
+                        class="form-control"
+                        id="Prenom"
+                        placeholder="Prénom"
+                        #studentPrenomInput="ngModel"
+                      />
+                      <div
+                        *ngIf="
+                          studentPrenomInput.invalid && studentPrenomInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        Le prénom est obligatoire
+                      </div>
+                      <label for="Filiere">Filière</label>
 
-                    <select class="custom-select d-block w-100" id="Filiere">
-                      <option value="">Choix...</option>
-                      <option>GL</option>
-                      <option>RT</option>
-                      <option>IMI</option>
-                      <option>IIA</option>
-                      <option>BIO</option>
-                      <option>CH</option>
-                    </select>
-                    <label for="Email">Email</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="Email"
-                      placeholder="Email"
-                    />
-                  </div>
-                  <div class="modal-footer">
-                    <!-- <button
+                      <select
+                        class="custom-select d-block w-100"
+                        id="Filiere"
+                        name="filiere"
+                        ngModel
+                        required
+                        #studentFiliereInput="ngModel"
+                      >
+                        <option value="">Choix...</option>
+                        <option value="GL">GL</option>
+                        <option value="RT">RT</option>
+                        <option value="IMI">IMI</option>
+                        <option value="IIA">IIA</option>
+                        <option value="BIO">BIO</option>
+                        <option value="CH">CH</option>
+                      </select>
+                      <div
+                        *ngIf="
+                          studentFiliereInput.invalid &&
+                          studentFiliereInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        Le choix de filière est obligatoire
+                      </div>
+                      <label for="Email">Email</label>
+                      <input
+                        ngModel
+                        required
+                        type="email"
+                        class="form-control"
+                        id="Email"
+                        placeholder="Email"
+                        name="email"
+                        #studentEmailInput="ngModel"
+                      />
+                      <div
+                        *ngIf="
+                          studentEmailInput.invalid && studentEmailInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        Le email est obligatoire et il doit etre valide
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button
                       type="button"
                       class="btn btn-secondary"
                       data-dismiss="modal"
@@ -282,10 +369,15 @@
                     >
                       Close
                     </button> -->
-                    <button type="button" class="btn btn-primary">
-                      Enregistrer
-                    </button>
-                  </div>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="addStudentManuallyForm(addStudentManually)"
+                      >
+                        Enregistrer
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

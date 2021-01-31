@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from '../models/student';
 import { StudentService } from '../services/student.service';
-import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-students',
@@ -10,6 +10,8 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  private file: File;
+
   selectedLimit: number;
   startItem : number;
   endItem : number;
@@ -111,6 +113,32 @@ export class StudentsComponent implements OnInit {
           }
           );}
       );
+    }
+    addStudentManuallyForm(addStudentManually: NgForm):void{
+      console.log(addStudentManually.value);
+    }
+    onFileChange(fileChangeEvent) {
+      this.file = fileChangeEvent.target.files[0];
+    }
+    addStudentsExcelForm(addStudentsExcel: NgForm):void{
+      let fd = new FormData();
+      //this.file, this.file.name
+      fd.append('students',this.file,this.file.name);
+      fd.append('nom',addStudentsExcel.value.nom);
+      fd.append('prenom',addStudentsExcel.value.prenom);
+      fd.append('email',addStudentsExcel.value.email);
+      fd.append('filiere',addStudentsExcel.value.filiere);
+      fd.append('cin',addStudentsExcel.value.cin);
+      fd.append('idEtudiant',addStudentsExcel.value.idEtudiant);
+      //console.log(fd.get('students'));
+
+      this.studentService.addStudentsFromExcel(fd).subscribe(
+        (response) => {
+          console.log(response);
+        }
+      )
+      //console.log(fd.get('students'));
+      //console.log(addStudentsExcel.value);
     }
 
 
