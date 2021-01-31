@@ -35,4 +35,13 @@ export class StudentService {
 
     return this.http.get<any>(AUTH_API+ "/paginate", {params})
   }
+
+  deleteStudent(id: number): Observable<any>{
+    console.log("deleteStudent from service here!")
+    return this.http.delete<any>(AUTH_API + "/" + id);
+  }
+
+  addStudentsFromExcel(fd: FormData): Observable<any>{
+    return this.http.post<any>(AUTH_API + "/upload",fd);
+  }
 }
