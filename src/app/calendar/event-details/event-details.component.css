@@ -1,0 +1,14 @@
+.dialog-title {
+  margin: 0;
+  padding: 15px;
+  font-size: 120%;
+  font-weight: 400;
+  background-color: #54c2b7;
+  color: #f3f9fb;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.full-width {
+  width: 100%;
+}

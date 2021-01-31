@@ -1,29 +1,18 @@
+import { event } from './../models/event';
+import { EventDetailsComponent } from './event-details/event-details.component';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
+import { isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  providers: [DatePipe]
 })
 export class CalendarComponent implements OnInit {
 
@@ -40,72 +29,56 @@ export class CalendarComponent implements OnInit {
     event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
+
+
+  events: event[] = [
     {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
+      id: 1,
+      start: new Date('2021-01-22 15:00'),
+      end: addHours(new Date('2021-01-22 15:00'), 1),
+      title: '15:00 | Soutenance Mokhtar Mami',
+      student: 'Mokhtar Mami',
+      filiere: 'GL',
     },
     {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
+      id: 2,
+      start: new Date('2021-01-21 14:00'),
+      end: addHours(new Date('2021-01-21 14:00'), 1),
+      title: '14:00 | Soutenance Ahmed Attia',
+      student: 'Ahmed Attia',
+      filiere: 'GL',
     },
     {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
+      id: 3,
+      start: new Date('2021-01-22 11:00'),
+      end: addHours(new Date('2021-01-22 11:00'), 1),
+      title: '11:00 | Soutenance Skander Trifa',
+      student: 'Skander Trifa',
+      filiere: 'GL',
     },
     {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
+      id: 4,
+      start: new Date('2021-01-21 10:00'),
+      end: addHours(new Date('2021-01-21 10:00'), 1),
+      title: '10:00 | Soutenance Soltane Jerbi',
+      student: 'Soltane Jerbi',
+      filiere: 'GL',
     },
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) { }
+  constructor(public datepipe: DatePipe, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.sort()
+  }
+
+  sort() {
+    this.events.sort((a, b) => a.start > b.start ? 1 : a.start < b.start ? -1 : 0)
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -122,49 +95,19 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
+  handleEvent(action: string, event: any): void {
+    const dialogRef = this.dialog.open(EventDetailsComponent, {
+
+      width: '600px',
+      panelClass: 'custom-dialog-container',
+      data: event
     });
-    this.handleEvent('Dropped or resized', event);
-  }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+    /*event = { 'Start Date': this.datepipe.transform(event.start, 'yyyy-MM-dd HH:mm'), 'End Date': this.datepipe.transform(event.end, 'yyyy-MM-dd HH:mm'), };
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.modal.open(this.modalContent, { size: 'lg' });*/
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
 
   setView(view: CalendarView) {
     this.view = view;
