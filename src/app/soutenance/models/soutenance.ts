@@ -58,6 +58,7 @@ export class Jury extends TimeStamp {
 
 export class Session extends TimeStamp{
   id: number;
+  name: string;
   dateDebut: Date;
   dateFin: Date;
   annee: Annee;

@@ -13,6 +13,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { AnneeComponent } from './components/annee/annee.component';
+import { SessionComponent } from './components/session/session.component';
+import { SalleComponent } from './components/salle/salle.component';
+import { JuryComponent } from './components/jury/jury.component';
+import { SujetComponent } from './components/sujet/sujet.component';
 
 
 
@@ -23,6 +27,10 @@ import { AnneeComponent } from './components/annee/annee.component';
     CreerSoutenanceComponent,
     AfficherSoutenancesComponent,
     AnneeComponent,
+    SessionComponent,
+    SalleComponent,
+    JuryComponent,
+    SujetComponent,
     
     
   ],

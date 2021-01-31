@@ -1,0 +1,40 @@
+      <div class="container-fluid">
+  
+        <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <h4 class="c-grey-900 mB-20">Salle</h4>
+<form>
+  <div class="form-group">
+    <label for="salleExistante">Sélectionner une salle deja existante</label>
+    <select class="form-control" id="salleExistante" [(ngModel)]="selectedSalle" name="selectedSalle">
+      <option *ngFor="let salle of salles" [ngValue]="salle">{{salle.code}}</option>
+     
+    </select>
+  </div>
+    <div class="form-group">
+      <label for="salle">Code du salle</label>
+      <input type="text" class="form-control" id="salle" 
+      placeholder="Salle" [(ngModel)]="salle.code" name="salle">
+    </div>
+    <div class="container">
+    <div class="row justify-content-md-center">
+      
+    <button type="submit" class="btn btn-primary" (click)="createSalle()">Creer une nouvelle salle</button>
+  
+  
+
+  
+    <button type="submit" class="btn btn-warning" (click)="modifySalle()">Modifier la salle sélectionnée</button>
+  
+  
+
+    
+    <button type="submit" class="btn btn-danger" (click)="deleteSalle()">Supprimer la salle sélectionnée</button>
+  
+    </div>
+  </div>
+  
+  </form>
+
+  </div>
+  </div>
+  
