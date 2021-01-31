@@ -1,3 +1,4 @@
+import { SoutenanceService } from './../soutenance/services/soutenance.service';
 import { event } from './../models/event';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
@@ -37,44 +38,73 @@ export class CalendarComponent implements OnInit {
   events: event[] = [
     {
       id: 1,
-      start: new Date('2021-01-22 15:00'),
-      end: addHours(new Date('2021-01-22 15:00'), 1),
-      title: '15:00 | Soutenance Mokhtar Mami',
-      student: 'Mokhtar Mami',
-      filiere: 'GL',
-    },
-    {
-      id: 2,
       start: new Date('2021-01-21 14:00'),
       end: addHours(new Date('2021-01-21 14:00'), 1),
       title: '14:00 | Soutenance Ahmed Attia',
       student: 'Ahmed Attia',
       filiere: 'GL',
-    },
-    {
-      id: 3,
-      start: new Date('2021-01-22 11:00'),
-      end: addHours(new Date('2021-01-22 11:00'), 1),
-      title: '11:00 | Soutenance Skander Trifa',
-      student: 'Skander Trifa',
-      filiere: 'GL',
-    },
-    {
-      id: 4,
-      start: new Date('2021-01-21 10:00'),
-      end: addHours(new Date('2021-01-21 10:00'), 1),
-      title: '10:00 | Soutenance Soltane Jerbi',
-      student: 'Soltane Jerbi',
-      filiere: 'GL',
-    },
+      salle: 223,
+      jury: [
+        {
+          id: 1,
+          userDetails: {
+            id: 1,
+            nom: "Teacher",
+            prenom: "1",
+            email: "teacher1@gmail.com",
+            role: "teacher",
+            createdAt: new Date('0000-00-00'),
+            updatedAt: new Date('0000-00-00'),
+            deletedAt: null
+          }
+        },
+        {
+          id: 2,
+          userDetails: {
+            id: 2,
+            nom: "Teacher",
+            prenom: "2",
+            email: "teacher2@gmail.com",
+            role: "teacher",
+            createdAt: new Date('0000-00-00'),
+            updatedAt: new Date('0000-00-00'),
+            deletedAt: null
+          }
+        }
+      ],
+      sujet: {
+        id: 1,
+        titre: 'CMS',
+        dateLimiteDepot: new Date('2021-01-31 23:59'),
+        description: 'Wordpress',
+        rapportPfe: {
+          id: 1,
+          path: '/www.pdf',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          deletedAt: null
+        },
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null
+      }
+    }
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(public datepipe: DatePipe, public dialog: MatDialog) { }
+  constructor(public datepipe: DatePipe, public dialog: MatDialog, private soutenanceService: SoutenanceService) { }
 
   ngOnInit(): void {
-    this.sort()
+    /*this.soutenanceService.getSoutenances().subscribe(
+      res => {
+        this.events = res.items;
+        this.events[0].start = new Date(res.items[0].dateDePassage);
+        console.log(res.items);
+        this.sort();
+      }
+    );*/
+    this.sort();
   }
 
   sort() {

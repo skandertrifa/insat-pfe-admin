@@ -1,3 +1,5 @@
+import { Sujet } from './../soutenance/models/soutenance';
+import { Enseignant } from './enseignant';
 export class event {
   id: number;
   title: string;
@@ -5,6 +7,9 @@ export class event {
   end: Date;
   student: string; //nom + prenom
   filiere: string;
+  salle: number;
+  jury: Enseignant[];
+  sujet: Sujet;
   color? =  '#ad2121';
   draggable? = false;
 }
