@@ -39,32 +39,8 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.selectedLimit = params.limit;
-
-
-      this.studentService.getStudentsPaginated(+params.page,+params.limit).subscribe(
-        (response) => {
-          console.log(response);
-          this.students = response.items;
-          //links
-          this.firstPage = response.links.first;
-          this.lastPage = response.links.last;
-          this.nextPage = response.links.next;
-          this.previousPage = response.links.previous;
-          //meta
-          this.totalItems = response.meta.totalItems;
-          this.itemCount = response.meta.itemCount;
-          this.itemsPerPage = response.meta.itemsPerPage;
-          this.totalPages = response.meta.totalPages;
-          this.tableIndexPage = new Array(this.totalPages);
-          this.currentPage = response.meta.currentPage;
-          // start item:
-          this.startItem = (params.page - 1) * this.selectedLimit + 1;
-          // end item
-          this.endItem = params.page * this.selectedLimit > this.totalItems ?
-            this.totalItems:
-            params.page * this.selectedLimit;
-      }
-    );}
+      this.getStudentsPaginated(+params.page,+params.limit);
+    }
     );}
     // handleClick ajouter etudiant manuellement
     handleAddStudentManually(): void{
@@ -99,6 +75,44 @@ export class StudentsComponent implements OnInit {
           queryParamsHandling: 'merge'
         });
     }
+    getStudentsPaginated(page: number,limit: number){
+      this.studentService.getStudentsPaginated(page,limit).subscribe(
+        (response) => {
+          console.log(response);
+          this.students = response.items;
+          //links
+          this.firstPage = response.links.first;
+          this.lastPage = response.links.last;
+          this.nextPage = response.links.next;
+          this.previousPage = response.links.previous;
+          //meta
+          this.totalItems = response.meta.totalItems;
+          this.itemCount = response.meta.itemCount;
+          this.itemsPerPage = response.meta.itemsPerPage;
+          this.totalPages = response.meta.totalPages;
+          this.tableIndexPage = new Array(this.totalPages);
+          this.currentPage = response.meta.currentPage;
+          // start item:
+          this.startItem = (page - 1) * this.selectedLimit + 1;
+          // end item
+          this.endItem = page * this.selectedLimit > this.totalItems ?
+            this.totalItems:
+            page * this.selectedLimit;
+      }
+      );
+    }
+    handleDeleteStudent(id: number): void{
+      console.log(id);
+      this.studentService.deleteStudent(id).subscribe(
+        (response) => {
+          this.route.queryParams.subscribe((params) => {
+            this.selectedLimit = params.limit;
+            this.getStudentsPaginated(+params.page,+params.limit);
+          }
+          );}
+      );
+    }
+
 
 
 

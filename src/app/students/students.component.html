@@ -33,7 +33,7 @@
                   </div>
                   <br />
                   <h5 style="color: rgb(31, 31, 31)">
-                    Nombre d'etudiants pas page
+                    Nombre d'etudiants par page
                   </h5>
 
                   <select
@@ -338,7 +338,10 @@
                     </button>
                   </td>
                   <td>
-                    <button class="btn btn-danger">
+                    <button
+                      class="btn btn-danger"
+                      (click)="handleDeleteStudent(student.id)"
+                    >
                       <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
                   </td>
