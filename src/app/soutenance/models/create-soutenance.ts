@@ -20,6 +20,7 @@ export class CreateJury   {
 }
 
 export class CreateSession  {
+  name:string
   dateDebut: Date;
   dateFin: Date;
   anneeId: number;
