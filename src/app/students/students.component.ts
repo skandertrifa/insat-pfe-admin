@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Student } from '../models/student';
 import { StudentService } from '../services/student.service';
 
@@ -36,6 +37,7 @@ export class StudentsComponent implements OnInit {
     private studentService: StudentService,
     private route: ActivatedRoute,
     private router: Router,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -73,7 +75,7 @@ export class StudentsComponent implements OnInit {
         [],
         {
           relativeTo: this.route,
-          queryParams: { limit: newValue },
+          queryParams: { limit: newValue, page: '1' },
           queryParamsHandling: 'merge'
         });
     }
@@ -134,7 +136,17 @@ export class StudentsComponent implements OnInit {
 
       this.studentService.addStudentsFromExcel(fd).subscribe(
         (response) => {
+          //this.toas
           console.log(response);
+          this.toastrService.success('Opération effectué avec succès!');
+          this.route.queryParams.subscribe((params) => {
+            this.selectedLimit = params.limit;
+            this.getStudentsPaginated(+params.page,+params.limit);
+          });
+          this.handleAddStudentExcel();
+        },
+        (erreur) => {
+          this.toastrService.error("Echec de l'opération :( ");
         }
       )
       //console.log(fd.get('students'));
