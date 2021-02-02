@@ -8,7 +8,7 @@ export class event {
   student: string; //nom + prenom
   filiere: string;
   salle: number;
-  jury: Enseignant[];
+  jury: any;
   sujet: Sujet;
   color? =  '#ad2121';
   draggable? = false;

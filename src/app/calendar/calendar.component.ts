@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { SoutenanceService } from './../soutenance/services/soutenance.service';
 import { event } from './../models/event';
 import { EventDetailsComponent } from './event-details/event-details.component';
@@ -36,7 +37,7 @@ export class CalendarComponent implements OnInit {
 
 
   events: event[] = [
-    {
+    /*{
       id: 1,
       start: new Date('2021-01-21 14:00'),
       end: addHours(new Date('2021-01-21 14:00'), 1),
@@ -44,8 +45,9 @@ export class CalendarComponent implements OnInit {
       student: 'Ahmed Attia',
       filiere: 'GL',
       salle: 223,
-      jury: [
-        {
+      jury: {
+        members: [],
+        president: [{
           id: 1,
           userDetails: {
             id: 1,
@@ -57,21 +59,8 @@ export class CalendarComponent implements OnInit {
             updatedAt: new Date('0000-00-00'),
             deletedAt: null
           }
-        },
-        {
-          id: 2,
-          userDetails: {
-            id: 2,
-            nom: "Teacher",
-            prenom: "2",
-            email: "teacher2@gmail.com",
-            role: "teacher",
-            createdAt: new Date('0000-00-00'),
-            updatedAt: new Date('0000-00-00'),
-            deletedAt: null
-          }
-        }
-      ],
+        }]
+      },
       sujet: {
         id: 1,
         titre: 'CMS',
@@ -88,23 +77,33 @@ export class CalendarComponent implements OnInit {
         updatedAt: new Date(),
         deletedAt: null
       }
-    }
+    }*/
   ];
-
   activeDayIsOpen: boolean = true;
 
-  constructor(public datepipe: DatePipe, public dialog: MatDialog, private soutenanceService: SoutenanceService) { }
+  constructor(public datepipe: DatePipe, public dialog: MatDialog, private soutenanceService: SoutenanceService, private _routes: ActivatedRoute) { }
 
   ngOnInit(): void {
-    /*this.soutenanceService.getSoutenances().subscribe(
+    this._routes.data.subscribe((response: any) => {
+      console.log(response);
+      this.events = response.e;
+      this.events[0].start = new Date(response.e[0].start);
+    })
+    /*console.log(this.events);
+    this.soutenanceService.getEvents().subscribe(
       res => {
-        this.events = res.items;
-        this.events[0].start = new Date(res.items[0].dateDePassage);
-        console.log(res.items);
+        this.events = res;
+        this.events[0].start = new Date();
+        this.events[0].title = " | ";
+        this.events[0].filiere = 'GL';
+        this.events[0].salle = res[0].salle.code;
+        this.events[0].student = 'AAAA';
+        console.log(this.events);
         this.sort();
       }
     );*/
-    this.sort();
+    //console.log(this.events);
+    //this.sort();
   }
 
   sort() {
