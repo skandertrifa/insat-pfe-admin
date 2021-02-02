@@ -1,3 +1,4 @@
+import { SoutenanceService } from 'src/app/soutenance/services/soutenance.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,12 +21,16 @@ const routes: Routes = [
       { path: 'Students', component: StudentsComponent },
       { path: 'Soutenance', loadChildren: () => import('./soutenance/soutenance.module')
       .then(m => m.SoutenanceModule), },
-      
-      
-      { path: 'Calendar', component: CalendarComponent },
+
+
+      { path: 'Calendar', component: CalendarComponent,
+      resolve: {
+        e: SoutenanceService  // on associe un resolver à la route
+      },
+      },
     ],
   },
- 
+
   { path:'Login', component: LoginComponent },
   { path:'**', component: Error404NotFoundComponent }
 ];

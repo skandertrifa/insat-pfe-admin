@@ -1,3 +1,4 @@
+import { Resolve } from '@angular/router';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -14,11 +15,15 @@ const RAPPORT_PFE_API='http://127.0.0.1:3000/annee';
 @Injectable({
   providedIn: 'root'
 })
-export class SoutenanceService {
+export class SoutenanceService implements Resolve<any> {
 
   constructor(private http: HttpClient) { }
   getSoutenances(page : number=1): Observable<any> {
     return this.http.get<any>(SOUTENANCE_API+`?page=${page}`);
   }
-  
+
+  resolve() {
+    return this.http.get(SOUTENANCE_API + "/event");
+  }
+
 }

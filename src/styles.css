@@ -3,8 +3,15 @@
 @import "~ngx-toastr/toastr";
 @import "~bootstrap";
 @import "~font-awesome";
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "angular-calendar/css/angular-calendar.css";
 @import 'flatpickr/dist/flatpickr.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+.custom-dialog-container .mat-dialog-container {
+  border-radius: 5% !important; ;
+  padding: 0 !important;;
+  margin: 0 !important;;
+}
 
 #loader {
   transition: all 0.3s ease-in-out;
@@ -11240,7 +11247,7 @@ footer {
   }
 }
 [class*="gap"] {
-  width: auto !important;
+  width: auto;
   overflow: hidden !important;
 }
 .gapX-0 {
@@ -65389,3 +65396,6 @@ table.dataTable.no-footer {
   font: 10px arial, san serif;
   text-align: left;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
