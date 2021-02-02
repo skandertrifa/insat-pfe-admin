@@ -1,1 +1,70 @@
-<p>jury works!</p>
+
+      <div class="container-fluid">
+  
+        <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <h4 class="c-grey-900 mB-20">Jury</h4>
+<form>
+  <div class="form-group">
+    <label for="juryExistante">Sélectionner une jury deja existante</label>
+    <select class="form-control" id="juryExistante" [(ngModel)]="selectedJury" 
+    name="selectedJury" (change)="updateForm()">
+      <option *ngFor="let jury of juries" [ngValue]="jury">
+        {{jury.president.userDetails.nom}} {{jury.president.userDetails.prenom}} : President |
+        {{jury.members[0].userDetails.nom}} {{jury.members[0].userDetails.prenom}} : Membre 1 |
+        {{jury.members[1].userDetails.nom}} {{jury.members[1].userDetails.prenom}} : Membre 2
+      </option>
+     
+    </select>
+  </div>
+    
+      <div class="form-group">
+        <label for="president">President de jury</label>
+      <select class="form-control" id="president" [(ngModel)]="selectedPresident" 
+      name="president" >
+        <option *ngFor="let enseignant of enseignants" [ngValue]="enseignant">{{enseignant.userDetails.nom}} {{enseignant.userDetails.prenom}}</option>
+       
+      </select>
+    </div>
+
+    <div class="form-group">
+        <label for="member1">Membre 1 de jury</label>
+      <select class="form-control" id="member1" [(ngModel)]="selectedMembers[0]" 
+      name="member1" >
+        <option *ngFor="let enseignant of enseignants" [ngValue]="enseignant">{{enseignant.userDetails.nom}} {{enseignant.userDetails.prenom}}</option>
+       
+      </select>
+    </div>
+
+    <div class="form-group">
+        <label for="member2">Membre 2 de jury</label>
+      <select class="form-control" id="member2" [(ngModel)]="selectedMembers[1]" 
+      name="member2" >
+        <option *ngFor="let enseignant of enseignants" [ngValue]="enseignant">{{enseignant.userDetails.nom}} {{enseignant.userDetails.prenom}}</option>
+       
+      </select>
+    </div>
+
+    
+    <div class="container">
+    <div class="row justify-content-md-center">
+      
+    <button type="submit" class="btn btn-primary" (click)="createJury()">Creer une nouvelle jury</button>
+  
+  
+
+  
+    <button type="submit" class="btn btn-warning" (click)="modifyJury()">Modifier la jury sélectionnée</button>
+  
+  
+
+    
+    <button type="submit" class="btn btn-danger" (click)="deleteJury()">Supprimer la jury sélectionnée</button>
+  
+    </div>
+  </div>
+  
+  </form>
+
+  </div>
+  </div>
+  
