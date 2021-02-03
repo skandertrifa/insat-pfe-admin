@@ -13,6 +13,8 @@ import { StudentService } from '../services/student.service';
 export class StudentsComponent implements OnInit {
   private file: File;
 
+  studentUpdate: Student;
+
   selectedLimit: number;
   startItem : number;
   endItem : number;
@@ -32,6 +34,7 @@ export class StudentsComponent implements OnInit {
   searchString= "";
   modalAddStudentManually = false;
   modalAddStudentExcel = false;
+  modalUpdateStudentManually = false;
   tableIndexPage;
   constructor(
     private studentService: StudentService,
@@ -53,6 +56,9 @@ export class StudentsComponent implements OnInit {
     // handleClick ajouter etudiant avec excel
     handleAddStudentExcel(): void{
       this.modalAddStudentExcel = !this.modalAddStudentExcel;
+    }
+    handleUpdateStudentManually(): void{
+        this.modalUpdateStudentManually = !this.modalUpdateStudentManually;
     }
     check = (event: any,x: number) => {
      if (this.currentPage === x) {
@@ -118,6 +124,20 @@ export class StudentsComponent implements OnInit {
     }
     addStudentManuallyForm(addStudentManually: NgForm):void{
       console.log(addStudentManually.value);
+      this.studentService.addStudentManually(addStudentManually.value).subscribe(
+        (response) => {
+          this.toastrService.success("l'ajout de l'étudiant a été effectué avec succeès :)");
+          this.route.queryParams.subscribe((params) => {
+            this.selectedLimit = params.limit;
+            this.getStudentsPaginated(+params.page,+params.limit);
+          });
+          this.handleAddStudentManually();
+        },
+        (erreur) => {
+          this.toastrService.error("Echec de l'ajout de l'étudiant");
+        }
+        );
+
     }
     onFileChange(fileChangeEvent) {
       this.file = fileChangeEvent.target.files[0];
@@ -149,8 +169,35 @@ export class StudentsComponent implements OnInit {
           this.toastrService.error("Echec de l'opération :( ");
         }
       )
-      //console.log(fd.get('students'));
-      //console.log(addStudentsExcel.value);
+
+    }
+
+    updateStudentManuallyForm(updateStudentManually): void{
+      console.log(updateStudentManually);
+      this.studentService.updateStudent(updateStudentManually.value).subscribe(
+        (response) => {
+          this.toastrService.success("la modification de l'étudiant a été effectué avec succeès :)");
+          this.route.queryParams.subscribe((params) => {
+            this.selectedLimit = params.limit;
+            this.getStudentsPaginated(+params.page,+params.limit);
+          });
+          this.handleUpdateStudentManually();
+        },
+        (erreur) => {
+          this.toastrService.error("Echec de la modification de l'étudiant");
+        }
+        );
+
+    }
+
+    handleUpdateStudentManuallyButton(student): void{
+      //const student = this.students.filter( student => student.idEtudiant == studentId)[0];
+      //console.log(student);
+      //console.log(studentId);
+      this.studentUpdate = student;
+      console.log(student);
+      this.handleUpdateStudentManually();
+
     }
 
 

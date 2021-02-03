@@ -44,4 +44,11 @@ export class StudentService {
   addStudentsFromExcel(fd: FormData): Observable<any>{
     return this.http.post<any>(AUTH_API + "/upload",fd);
   }
+  addStudentManually(student): Observable<any>{
+    return this.http.post<any>(AUTH_API,student);
+  }
+  updateStudent(student): Observable<any>{
+    console.log(student);
+    return this.http.put<any>(AUTH_API + "/" +student.idEtudiant,student);
+  }
 }
