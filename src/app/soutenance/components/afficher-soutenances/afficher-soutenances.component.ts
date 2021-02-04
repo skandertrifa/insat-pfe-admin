@@ -5,7 +5,7 @@ import { SoutenanceService } from 'src/app/soutenance/services/soutenance.servic
 
 
 @Component({
-  selector: 'app-soutenance',
+  selector: 'app-afficher-soutenance',
   templateUrl: './afficher-soutenances.component.html',
   styleUrls: ['./afficher-soutenances.component.css']
 })

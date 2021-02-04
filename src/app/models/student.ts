@@ -1,5 +1,6 @@
 export class Student {
   id: number;
+  idEtudiant: number;
   cin: number;
   filiere: string;
   sujet: string

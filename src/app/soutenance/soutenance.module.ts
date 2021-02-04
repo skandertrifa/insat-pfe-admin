@@ -17,6 +17,7 @@ import { SessionComponent } from './components/session/session.component';
 import { SalleComponent } from './components/salle/salle.component';
 import { JuryComponent } from './components/jury/jury.component';
 import { SujetComponent } from './components/sujet/sujet.component';
+import { SoutenanceFormComponent } from './components/soutenance-form/soutenance-form.component';
 
 
 
@@ -31,6 +32,7 @@ import { SujetComponent } from './components/sujet/sujet.component';
     SalleComponent,
     JuryComponent,
     SujetComponent,
+    SoutenanceFormComponent
     
     
   ],

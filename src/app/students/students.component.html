@@ -80,11 +80,10 @@
               </div>
             </div>
             <!-- Modal EXCEEEEEL -->
-            <!-- to show we add
-              style="display: block; padding-right: 16px"
-              class="modal fade show"
+            <!-- Modal EXCEEEEEL -->
+            <!-- Modal EXCEEEEEL -->
+            <!-- Modal EXCEEEEEL -->
 
-            -->
             <div
               class="modal fade"
               [ngClass]="modalAddStudentExcel === true ? 'show' : ''"
@@ -100,7 +99,11 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="addStudentModalLongTitle">
+                    <h5
+                      style="color: blue"
+                      class="modal-title"
+                      id="addStudentModalLongTitle"
+                    >
                       Ajouter des etudiants à partir d'Excel
                     </h5>
                     <button
@@ -130,6 +133,12 @@
                         #fileInput="ngModel"
                         (change)="onFileChange($event)"
                       />
+                      <div
+                        *ngIf="fileInput.invalid && fileInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        Le fichier excel est nécessaire pour l'opération
+                      </div>
                       <br />
                       <h5>Nom des colonnes dans excel:</h5>
                       <br />
@@ -146,6 +155,12 @@
                         required
                         #excelNomInput="ngModel"
                       />
+                      <div
+                        *ngIf="excelNomInput.invalid && excelNomInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        nom obligatoire
+                      </div>
                       <label for="Prenom"
                         >Nom de la colonne "prenom" dans le fichier excel</label
                       >
@@ -159,6 +174,14 @@
                         required
                         #excelPrenomInput="ngModel"
                       />
+                      <div
+                        *ngIf="
+                          excelPrenomInput.invalid && excelPrenomInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        Le prénom est obligatoire
+                      </div>
                       <label for="Filiere"
                         >Nom de la colonne "Filière" dans le fichier
                         excel</label
@@ -174,6 +197,14 @@
                         required
                         #excelFiliereInput="ngModel"
                       />
+                      <div
+                        *ngIf="
+                          excelFiliereInput.invalid && excelFiliereInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        La filière est obligatoire
+                      </div>
                       <label for="Email"
                         >Nom de la colonne "Email" dans le fichier excel</label
                       >
@@ -187,6 +218,12 @@
                         required
                         #excelEmailInput="ngModel"
                       />
+                      <div
+                        *ngIf="excelEmailInput.invalid && excelEmailInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        L'email est obligatoire
+                      </div>
                       <label for="CIN"
                         >Nom de la colonne "CIN" dans le fichier excel</label
                       >
@@ -200,6 +237,12 @@
                         required
                         #excelCinInput="ngModel"
                       />
+                      <div
+                        *ngIf="excelCinInput.invalid && excelCinInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        La cin est obligatoire
+                      </div>
                       <label for="idEtudiant"
                         >Nom de la colonne "idEtudiant" dans le fichier
                         excel</label
@@ -214,6 +257,15 @@
                         required
                         #excelIdEtudiantInput="ngModel"
                       />
+                      <div
+                        *ngIf="
+                          excelIdEtudiantInput.invalid &&
+                          excelIdEtudiantInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        La id de l'étudiant est obligatoire
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <!-- <button
@@ -227,6 +279,7 @@
                       <button
                         type="button"
                         class="btn btn-primary"
+                        [disabled]="addStudentsExcel.invalid"
                         (click)="addStudentsExcelForm(addStudentsExcel)"
                       >
                         Envoyer
@@ -237,12 +290,11 @@
               </div>
             </div>
 
-            <!-- Modal -->
-            <!-- to show we add
-              style="display: block; padding-right: 16px"
-              class="modal fade show"
+            <!-- Modal Add Manually -->
+            <!-- Modal Add Manually -->
+            <!-- Modal Add Manually -->
+            <!-- Modal Add Manually -->
 
-            -->
             <div
               class="modal fade"
               [ngClass]="modalAddStudentManually === true ? 'show' : ''"
@@ -258,7 +310,11 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="addStudentModalLongTitle">
+                    <h5
+                      style="color: blue"
+                      class="modal-title"
+                      id="addStudentModalLongTitle"
+                    >
                       Ajouter un etudiant manuellement
                     </h5>
                     <button
@@ -312,6 +368,43 @@
                         class="alert alert-danger"
                       >
                         Le prénom est obligatoire
+                      </div>
+                      <label for="CIN">CIN</label>
+                      <input
+                        ngModel
+                        required
+                        name="cin"
+                        type="text"
+                        class="form-control"
+                        id="CIN"
+                        placeholder="Cin"
+                        #studentCINInput="ngModel"
+                      />
+                      <div
+                        *ngIf="studentCINInput.invalid && studentCINInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        Le Cin est obligatoire
+                      </div>
+                      <label for="idEtudiant">idEtudiant</label>
+                      <input
+                        ngModel
+                        required
+                        name="idEtudiant"
+                        type="text"
+                        class="form-control"
+                        id="idEtudiant"
+                        placeholder="id etudiant"
+                        #studentIdEtudiantInput="ngModel"
+                      />
+                      <div
+                        *ngIf="
+                          studentIdEtudiantInput.invalid &&
+                          studentIdEtudiantInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        L'id de l'étudiant est obligatoire
                       </div>
                       <label for="Filiere">Filière</label>
 
@@ -371,6 +464,7 @@
                     </button> -->
                       <button
                         type="button"
+                        [disabled]="addStudentManually.invalid"
                         class="btn btn-primary"
                         (click)="addStudentManuallyForm(addStudentManually)"
                       >
@@ -381,6 +475,199 @@
                 </div>
               </div>
             </div>
+            <!-- Modal update student  -->
+            <div
+              class="modal fade"
+              [ngClass]="modalUpdateStudentManually === true ? 'show' : ''"
+              id="updateStudentModalCenter"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="updateStudentModalCenterTitle"
+              aria-hidden="true"
+              style="display: block; padding-right: 16px"
+              *ngIf="modalUpdateStudentManually"
+            >
+              <!-- style="display: block; padding-right: 16px" -->
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5
+                      style="color: blue"
+                      class="modal-title"
+                      id="updateStudentModalLongTitle"
+                    >
+                      Modification de l'etudiant
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span
+                        aria-hidden="true"
+                        (click)="handleUpdateStudentManually()"
+                        >&times;</span
+                      >
+                    </button>
+                  </div>
+                  <form #updateStudentManually="ngForm">
+                    <div class="modal-body">
+                      <!-- inputs are here -->
+                      <label for="Nom">Nom</label>
+                      <input
+                        ngModel
+                        [ngModel]="studentUpdate.userDetails.nom"
+                        required
+                        type="text"
+                        class="form-control"
+                        id="Nom"
+                        placeholder="Nom"
+                        name="nom"
+                        #studentNomInput="ngModel"
+                      />
+                      <div
+                        *ngIf="studentNomInput.invalid && studentNomInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        Le nom est obligatoire
+                      </div>
+                      <label for="Prenom">Prenom</label>
+                      <input
+                        ngModel
+                        [(ngModel)]="studentUpdate.userDetails.prenom"
+                        required
+                        name="prenom"
+                        type="text"
+                        class="form-control"
+                        id="Prenom"
+                        placeholder="Prénom"
+                        #studentPrenomInput="ngModel"
+                      />
+                      <div
+                        *ngIf="
+                          studentPrenomInput.invalid && studentPrenomInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        Le prénom est obligatoire
+                      </div>
+                      <label for="CIN">CIN</label>
+                      <input
+                        ngModel
+                        [(ngModel)]="studentUpdate.cin"
+                        required
+                        name="cin"
+                        type="text"
+                        class="form-control"
+                        id="CIN"
+                        placeholder="Cin"
+                        #studentCINInput="ngModel"
+                      />
+                      <div
+                        *ngIf="studentCINInput.invalid && studentCINInput.dirty"
+                        class="alert alert-danger"
+                      >
+                        Le Cin est obligatoire
+                      </div>
+                      <label for="idEtudiant">idEtudiant</label>
+                      <input
+                        ngModel
+                        [(ngModel)]="studentUpdate.idEtudiant"
+                        required
+                        name="idEtudiant"
+                        type="text"
+                        class="form-control"
+                        id="idEtudiant"
+                        placeholder="id etudiant"
+                        #studentIdEtudiantInput="ngModel"
+                      />
+                      <div
+                        *ngIf="
+                          studentIdEtudiantInput.invalid &&
+                          studentIdEtudiantInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        L'id de l'étudiant est obligatoire
+                      </div>
+                      <label for="Filiere">Filière</label>
+
+                      <select
+                        class="custom-select d-block w-100"
+                        id="Filiere"
+                        name="filiere"
+                        [(ngModel)]="studentUpdate.filiere"
+                        ngModel
+                        required
+                        #studentFiliereInput="ngModel"
+                      >
+                        <option value="">Choix...</option>
+                        <option value="GL">GL</option>
+                        <option value="RT">RT</option>
+                        <option value="IMI">IMI</option>
+                        <option value="IIA">IIA</option>
+                        <option value="BIO">BIO</option>
+                        <option value="CH">CH</option>
+                      </select>
+                      <div
+                        *ngIf="
+                          studentFiliereInput.invalid &&
+                          studentFiliereInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        Le choix de filière est obligatoire
+                      </div>
+                      <label for="Email">Email</label>
+                      <input
+                        ngModel
+                        [(ngModel)]="studentUpdate.userDetails.email"
+                        required
+                        type="email"
+                        class="form-control"
+                        id="Email"
+                        placeholder="Email"
+                        name="email"
+                        #studentEmailInput="ngModel"
+                      />
+                      <div
+                        *ngIf="
+                          studentEmailInput.invalid && studentEmailInput.dirty
+                        "
+                        class="alert alert-danger"
+                      >
+                        Le email est obligatoire et il doit etre valide
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button
+                       type="button"
+                       class="btn btn-secondary"
+                       data-dismiss="modal"
+                       (click)="handleAddStudentManually()"
+                     >
+                       Close
+                     </button> -->
+                      <button
+                        type="button"
+                        [disabled]="
+                          updateStudentManually.invalid ||
+                          updateStudentManually.pristine
+                        "
+                        class="btn btn-primary"
+                        (click)="
+                          updateStudentManuallyForm(updateStudentManually)
+                        "
+                      >
+                        Enregistrer
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
             <!-- end Modal -->
             <table id="dataTable" class="table" cellspacing="0" width="100%">
               <thead class="thead-dark">
@@ -425,7 +712,10 @@
                   <td>{{ student.userDetails.nom }}</td>
                   <td>{{ student.sujet }}</td>
                   <td>
-                    <button class="btn btn-secondary">
+                    <button
+                      class="btn btn-secondary"
+                      (click)="handleUpdateStudentManuallyButton(student)"
+                    >
                       <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
                   </td>
