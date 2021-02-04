@@ -1,3 +1,4 @@
+import { SujetModule } from './sujet/sujet.module';
 import { SoutenanceService } from 'src/app/soutenance/services/soutenance.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,8 @@ const routes: Routes = [
       { path: 'Soutenance', loadChildren: () => import('./soutenance/soutenance.module')
       .then(m => m.SoutenanceModule), },
 
+      { path: 'Sujet', loadChildren: () => import('./sujet/sujet.module')
+      .then(m => m.SujetModule), },
 
       { path: 'Calendar', component: CalendarComponent,
       resolve: {

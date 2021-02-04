@@ -1,0 +1,65 @@
+
+
+<div class="container-fluid">
+
+  <div class="bgc-white bd bdrs-3 p-20 mB-20">
+      <h4 class="c-grey-900 mB-20">Session</h4>
+<form>
+<!--   <div class="form-group">
+
+     <label for="sessionExistante">Sélectionner une session deja existante</label>
+    <select class="form-control" id="sessionExistante" [(ngModel)]="selectedSession"
+    name="selectedSession" (change)="updateForm()">
+      <option *ngFor="let session of sessions" [ngValue]="session">{{session.name}}</option>
+
+    </select>
+
+  </div> -->
+
+    <div class="form-group">
+      <label for="titre">Titre</label>
+      <input type="text" class="form-control" id="titre"
+      placeholder="Titre" [(ngModel)]="selectedSujet.titre" name="titre" value="selectedSujet">
+    </div>
+
+    <div class="form-group">
+        <label for="dateLimite">Date Limite de Mise Rapport</label>
+      <input type="date" class="form-control" id="dateLimite"
+      placeholder="data" [(ngModel)]="selectedSujet.dateLimiteDepot" name="dateLimite">
+    </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+      <input type="text" class="form-control" id="description"
+      placeholder="description" [(ngModel)]="selectedSujet.description" name="description">
+      </div>
+
+      <div class="form-group">
+        <label for="annee">ID Etudiant</label>
+        <input type="text" class="form-control" id="idEtudiant"
+        placeholder="idEtudiant" [(ngModel)]="selectedSujet.etudiant.idEtudiant" name="idEtudiant">
+      </div>
+
+    <div class="container">
+    <div class="row justify-content-md-center">
+
+   <!--  <button type="submit" class="btn btn-primary" (click)="createSession()">Creer une nouvelle session</button>
+
+
+
+
+    <button type="submit" class="btn btn-warning" (click)="modifySession()">Modifier la session sélectionnée</button>
+
+
+
+
+    <button type="submit" class="btn btn-danger" (click)="deleteSession()">Supprimer la session sélectionnée</button> -->
+
+    </div>
+  </div>
+
+  </form>
+
+  </div>
+  </div>
+
