@@ -167,7 +167,7 @@
                         [class.disabled]="previousPage === '' ? true : null"
                         (click)="checkPreviousPage($event)"
                         class="page-link"
-                        [routerLink]="['../Students']"
+                        [routerLink]="['../Teachers']"
                         [queryParams]="{ page: currentPage + -1 }"
                         queryParamsHandling="merge"
                         >Précedent</a
@@ -183,7 +183,7 @@
                         [class.disabled]="i + 1 === currentPage ? true : null"
                         (click)="check($event, i + 1)"
                         class="page-link"
-                        [routerLink]="['../Students']"
+                        [routerLink]="['../Teachers']"
                         [queryParams]="{ page: i + 1 }"
                         queryParamsHandling="merge"
                       >
@@ -216,7 +216,7 @@
                         [class.disabled]="nextPage === '' ? true : null"
                         (click)="checkNextPage($event)"
                         class="page-link"
-                        [routerLink]="['../Students']"
+                        [routerLink]="['../Teachers']"
                         [queryParams]="{ page: currentPage + 1 }"
                         queryParamsHandling="merge"
                         >Suivant</a

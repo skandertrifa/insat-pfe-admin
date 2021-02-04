@@ -113,7 +113,7 @@ export class TeachersComponent implements OnInit {
           this.tableIndexPage = new Array(this.totalPages);
           this.currentPage = response.meta.currentPage;
           // start item:
-          this.startItem = (page - 1) * this.selectedLimit + 1;
+          this.startItem = this.totalItems? (page - 1) * this.selectedLimit + 1:0;
           // end item
           this.endItem = page * this.selectedLimit > this.totalItems ?
             this.totalItems:
