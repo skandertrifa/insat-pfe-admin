@@ -1,3 +1,4 @@
+import { TeachersComponent } from './teachers/teachers.component';
 import { SujetModule } from './sujet/sujet.module';
 import { SoutenanceService } from 'src/app/soutenance/services/soutenance.service';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -25,6 +26,8 @@ const routes: Routes = [
 
       { path: 'Sujet', loadChildren: () => import('./sujet/sujet.module')
       .then(m => m.SujetModule), },
+
+      { path: 'Teachers', component: TeachersComponent},
 
       { path: 'Calendar', component: CalendarComponent,
       resolve: {

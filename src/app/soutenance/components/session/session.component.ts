@@ -26,7 +26,7 @@ export class SessionComponent implements OnInit {
   checkExistance(object) : boolean
   {
     for (let feature in object){
-      
+
       if (object[feature] ===null)
         return false
     }
@@ -36,14 +36,14 @@ export class SessionComponent implements OnInit {
   loadAnnees(){
     this.anneeService.getAnnees().subscribe(
       (response) => {
-        this.annees = response;        
+        this.annees = response;
       })
   }
 
   loadSessions(){
     this.sessionService.getSessions().subscribe(
       (response) => {
-        this.sessions = response;        
+        this.sessions = response;
       })
   }
 
@@ -57,18 +57,19 @@ export class SessionComponent implements OnInit {
     return this.session
   }
   createSession(){
+    this.session = this.getSessionForm();
     if (!this.checkExistance(this.session)){
       return ;
     }
-    this.sessionService.createSession(this.getSessionForm()).subscribe(
+    this.sessionService.createSession(this.session).subscribe(
       (response) =>{
         this.loadSessions()
       }
-    )   
+    )
   }
 
   modifySession(){
-    
+
     const modifySession :Partial<CreateSession>={}
     for (let feature in this.session)
     {
@@ -83,26 +84,26 @@ export class SessionComponent implements OnInit {
       (response) =>{
         this.loadSessions()
       }
-    )   
+    )
   }
-  
+
   deleteSession(){
-    
+
     this.sessionService.deleteSession(this.selectedSession.id).subscribe(
       (response) =>{
         this.loadSessions()
       }
-    )   
+    )
   }
-  
+
 
   updateForm(){
     this.session["dateDebut"]=this.selectedSession.dateDebut
     this.session["dateFin"]=this.selectedSession.dateFin
     this.session["name"]=this.selectedSession.name
     this.session["anneeId"]=this.selectedSession.annee.id
-    
-    
+
+
     for(let annee of this.annees){
       if (annee.id===this.selectedSession.annee.id){
         this.selectedAnnee=annee
@@ -113,13 +114,13 @@ export class SessionComponent implements OnInit {
     console.log("selected session : ",this.selectedSession)
     console.log("session : ",this.session)
     console.log("update selected annee : ",this.selectedAnnee)
-    
-    
+
+
   }
-  compareAnnee(c1: Annee, c2:number): boolean {  
-    console.log("c1 : ",c1)   
+  compareAnnee(c1: Annee, c2:number): boolean {
+    console.log("c1 : ",c1)
     console.log("c2 : ",c2)
-    return c1.id === c2 
+    return c1.id === c2
 }
 
 

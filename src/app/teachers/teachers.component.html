@@ -1,0 +1,241 @@
+<link
+  href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
+  rel="stylesheet"
+/>
+
+<main class="main-content bgc-grey-100">
+  <div id="mainContent">
+    <div class="container-fluid">
+      <h4 class="c-grey-900 mT-10 mB-30">Tableau</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <h4 class="c-grey-900 mB-20">Enseignants</h4>
+            <div class="dataTables_length" id="dataTable_length">
+              <div class="row mb-5">
+                <!-- <div class="col-md-4"> -->
+                <div class="col-5">
+                  <div id="dataTable_filter" class="dataTables_filter">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="fa fa-search" aria-hidden="true"></i
+                        ></span>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Search"
+                        placeholder="Recherche d'un enseignant"
+                        [(ngModel)]="searchString"
+                      />
+                    </div>
+                  </div>
+                  <br />
+                  <h5 style="color: rgb(31, 31, 31)">
+                    Nombre d'enseignants par page
+                  </h5>
+
+                  <select
+                    name="dataTable_length"
+                    aria-controls="dataTable"
+                    class="custom-select"
+                    id="selectedLimit"
+                    [(ngModel)]="selectedLimit"
+                    (ngModelChange)="onChange($event)"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+                <!-- <div class="col-md-4 offset-md-4"> -->
+                <div class="col-3">
+                  <!-- Right side put something here ! -->
+                  <button
+                    placeholder="Ajouter un etudiant"
+                    class="btn btn-primary"
+                    (click)="handleAddStudentManually(selectedLimit)"
+                  >
+                    Ajouter manuellement
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="col-4">
+                  <button
+                    placeholder="Ajouter un etudiant"
+                    class="btn btn-primary"
+                    (click)="handleAddStudentExcel()"
+                  >
+                    Ajouter à partir d'Excel
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+
+                    <!-- <i class="fa fa-file-excel-o" aria-hidden="true"></i> -->
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Modal EXCEEEEEL -->
+            <!-- Modal EXCEEEEEL -->
+            <!-- Modal EXCEEEEEL -->
+            <!-- Modal EXCEEEEEL -->
+
+
+
+            <!-- Modal Add Manually -->
+            <!-- Modal Add Manually -->
+            <!-- Modal Add Manually -->
+            <!-- Modal Add Manually -->
+
+            <!-- Modal update student  -->
+
+
+            <!-- end Modal -->
+            <table id="dataTable" class="table" cellspacing="0" width="100%">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Email</th>
+                  <th>Prenom</th>
+                  <th>Nom</th>
+                  <th>Modifier</th>
+                  <th>Supprimer</th>
+                </tr>
+              </thead>
+              <!-- <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Office</th>
+                  <th>Age</th>
+                  <th>Start date</th>
+                  <th>Salary</th>
+                </tr>
+              </tfoot> -->
+              <tbody>
+                <!-- <tr
+                  *ngFor="
+                    let student of students
+                      | studentSearch
+                        : {
+                            cin: searchString,
+                            filiere: searchString,
+                            email: searchString
+                          }
+                  "
+                > -->
+                <tr *ngFor="let teacher of teachers | filter: searchString">
+                  <td>{{ teacher.userDetails.email }}</td>
+                  <td>{{ teacher.userDetails.prenom }}</td>
+                  <td>{{ teacher.userDetails.nom }}</td>
+                  <td>
+                    <button
+                      class="btn btn-secondary"
+                      (click)="handleUpdateStudentManuallyButton(teacher, currentPage, selectedLimit)"
+                    >
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger"
+                      (click)="handleDeleteStudent(teacher.id, currentPage, selectedLimit)"
+                    >
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td>Tiger Nixon</td>
+                  <td>System Architect</td>
+                  <td>Edinburgh</td>
+                  <td>61</td>
+                  <td>2011/04/25</td>
+                  <td>$320,800</td>
+                </tr> -->
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <a
+                        [class.disabled]="previousPage === '' ? true : null"
+                        (click)="checkPreviousPage($event)"
+                        class="page-link"
+                        [routerLink]="['../Students']"
+                        [queryParams]="{ page: currentPage + -1 }"
+                        queryParamsHandling="merge"
+                        >Précedent</a
+                      >
+                    </li>
+
+                    <li
+                      class="page-item"
+                      *ngFor="let page of tableIndexPage; let i = index"
+                      [ngClass]="currentPage === i + 1 ? 'active' : ''"
+                    >
+                      <a
+                        [class.disabled]="i + 1 === currentPage ? true : null"
+                        (click)="check($event, i + 1)"
+                        class="page-link"
+                        [routerLink]="['../Students']"
+                        [queryParams]="{ page: i + 1 }"
+                        queryParamsHandling="merge"
+                      >
+                        <!-- <a
+                    [class.disabled]="i + 1 === currentPage ? true : null"
+                    (click)="check($event, i + 1)"
+                    class="page-link"
+                    [href]="
+                      'http://localhost:4200/Students?page=' +
+                      (i + 1) +
+                      '&limit=' +
+                      selectedLimit
+                    "
+                  > -->
+                        {{ i + 1 }}
+                      </a>
+                    </li>
+
+                    <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                    <li class="page-item">
+                      <!-- <a
+                    [class.disabled]="nextPage === '' ? true : null"
+                    (click)="checkNextPage($event)"
+                    class="page-link"
+                    [href]="nextPage"
+                    >Suivant</a
+                  > -->
+                      <a
+                        [class.disabled]="nextPage === '' ? true : null"
+                        (click)="checkNextPage($event)"
+                        class="page-link"
+                        [routerLink]="['../Students']"
+                        [queryParams]="{ page: currentPage + 1 }"
+                        queryParamsHandling="merge"
+                        >Suivant</a
+                      >
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <br />
+              <div style="color: #72777a" class="row-6 mt-2 mr-5">
+                De {{ startItem }}
+                à
+                {{ endItem }}
+                du total {{ totalItems }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

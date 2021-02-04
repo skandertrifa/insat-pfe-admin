@@ -29,6 +29,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EventDetailsComponent } from './calendar/event-details/event-details.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TeachersComponent } from './teachers/teachers.component';
+import { AddTeacherComponent } from './teachers/add-teacher/add-teacher.component';
+import { EditTeacherComponent } from './teachers/edit-teacher/edit-teacher.component';
+import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher.component';
 
 
 @NgModule({
@@ -44,6 +48,10 @@ import { MatInputModule } from '@angular/material/input';
     StudentSearchPipe,
     CalendarComponent,
     EventDetailsComponent,
+    TeachersComponent,
+    AddTeacherComponent,
+    EditTeacherComponent,
+    DeleteTeacherComponent,
   ],
   imports: [
     CommonModule,
