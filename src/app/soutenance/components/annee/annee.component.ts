@@ -1,7 +1,9 @@
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AnneeService } from '../../services/annee.service';
 import { Component, OnInit } from '@angular/core';
 import { Annee } from '../../models/soutenance';
 import { CreateAnnee } from '../../models/create-soutenance';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-annee',
@@ -13,8 +15,11 @@ export class AnneeComponent implements OnInit {
   annees : Annee[] = []
   selectedAnnee : Annee
   annee : CreateAnnee={annee : null}
-
-  constructor(private anneeService: AnneeService) { }
+  form : FormGroup
+  
+  constructor(private anneeService: AnneeService,
+              private toastrService: ToastrService) {}
+  
 
   checkExistance(object) : boolean
   {
@@ -45,6 +50,10 @@ export class AnneeComponent implements OnInit {
     this.anneeService.createAnnee(this.annee).subscribe(
       (response) =>{
         this.loadAnnees()
+        this.toastrService.success("L' année est ajoutée avec succès");
+      },
+      (erreur) =>{
+        this.toastrService.error("Veuillez vérifier l'annee entrée");
       }
     )   
   }
@@ -62,6 +71,10 @@ export class AnneeComponent implements OnInit {
     this.anneeService.modifyAnnee(modifyAnnee,this.selectedAnnee.id).subscribe(
       (response) =>{
         this.loadAnnees()
+        this.toastrService.success("L' année est modifiée avec succès");
+      },
+      (erreur) =>{
+        this.toastrService.error("Veuillez vérifier l' année entrée");
       }
     )   
   }
@@ -71,6 +84,10 @@ export class AnneeComponent implements OnInit {
     this.anneeService.deleteAnnee(this.selectedAnnee.id).subscribe(
       (response) =>{
         this.loadAnnees()
+        this.toastrService.success("L' année est Supprimée avec succès");
+      },
+      (erreur) =>{
+        this.toastrService.error("Erreur de suppression");
       }
     )   
   }
