@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { CreateSalle } from '../../models/create-soutenance';
 import { Salle } from '../../models/soutenance';
 import { SalleService } from '../../services/salle.service';
@@ -14,7 +15,8 @@ export class SalleComponent implements OnInit {
   selectedSalle : Salle
   salle : CreateSalle={code : null}
 
-  constructor(private salleService: SalleService) { }
+  constructor(private salleService: SalleService,
+              private toastrService: ToastrService) { }
 
   checkExistance(object) : boolean
   {
@@ -45,6 +47,10 @@ export class SalleComponent implements OnInit {
     this.salleService.createSalle(this.salle).subscribe(
       (response) =>{
         this.loadsalles()
+        this.toastrService.success("La salle est Crée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Une salle de meme code est dèja Crée");
       }
     )   
   }
@@ -62,6 +68,10 @@ export class SalleComponent implements OnInit {
     this.salleService.modifySalle(modifySalle,this.selectedSalle.id).subscribe(
       (response) =>{
         this.loadsalles()
+        this.toastrService.success("La salle est Modifiée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Une salle de meme code est dèja Crée");
       }
     )   
   }
@@ -71,6 +81,7 @@ export class SalleComponent implements OnInit {
     this.salleService.deleteSalle(this.selectedSalle.id).subscribe(
       (response) =>{
         this.loadsalles()
+        this.toastrService.success("La salle est Supprimée avec succès");
       }
     )   
   }

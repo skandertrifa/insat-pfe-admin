@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { CreateJury } from '../../models/create-soutenance';
 import { Jury } from '../../models/soutenance';
 import { JuryService } from '../../services/jury.service';
+import { ToastrService } from 'ngx-toastr';
+import { JuryValidation } from '../../enums/jury-validation.enum';
 
 @Component({
   selector: 'app-jury',
@@ -21,7 +23,8 @@ export class JuryComponent implements OnInit {
 
   constructor(
     private juryService: JuryService,
-    private enseignantService : EnseignantService) { }
+    private enseignantService : EnseignantService,
+    private toastrService: ToastrService) { }
 
   checkExistance(object) : boolean
   {
@@ -54,6 +57,28 @@ export class JuryComponent implements OnInit {
     this.loadEnseignants()
   }
 
+  validateForm(jury) : JuryValidation{
+
+    if(jury.president===jury.members[0] ||
+      jury.president===jury.members[1] ||
+      jury.members[1]===jury.members[0])
+        return JuryValidation.DuplicateError 
+    
+    return JuryValidation.valid
+
+  }
+
+  validation(fromState : JuryValidation) : boolean {
+    if (fromState ===JuryValidation.DuplicateError )
+    {
+      this.toastrService.error("Les membres de la juries doivent etre unique");
+      return false
+    }
+
+    return true
+
+  }
+
   getJuryForm(){
     this.jury["president"]=this.selectedPresident.id
     this.jury["members"][0]=this.selectedMembers[0].id
@@ -64,9 +89,18 @@ export class JuryComponent implements OnInit {
     if (!this.checkExistance(this.jury)){
       return ;
     }
+    this.jury=this.getJuryForm()
+    const validForm =this.validateForm(this.jury)
+    if(!this.validation(validForm))
+      return ;
+
     this.juryService.createJury(this.getJuryForm()).subscribe(
       (response) =>{
         this.loadJuries()
+        this.toastrService.success("La jury est Crée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
       }
     )   
   }
@@ -88,10 +122,17 @@ export class JuryComponent implements OnInit {
     if (this.selectedMembers[1])
       modifyJury.members[1]=this.selectedMembers[1].id
 
-    console.log("modifyJury : ",modifyJury)
+    const validForm =this.validateForm(modifyJury)
+    if(!this.validation(validForm))
+        return ;
+
     this.juryService.modifyJury(modifyJury,this.selectedJury.id).subscribe(
       (response) =>{
         this.loadJuries()
+        this.toastrService.success("La jury est Modifiée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
       }
     )   
   }
@@ -101,6 +142,10 @@ export class JuryComponent implements OnInit {
     this.juryService.deleteJury(this.selectedJury.id).subscribe(
       (response) =>{
         this.loadJuries()
+        this.toastrService.success("La jury est Supprimée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
       }
     )   
   }

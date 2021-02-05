@@ -64,6 +64,7 @@
                   <th>Jury</th>
                   <th>salle</th>
                   <th>Sujet</th>
+                  <th>Effacer</th>
                   
                 </tr>
               </thead>
@@ -111,6 +112,11 @@
                   </td>
                   <td>{{ soutenance?.salle.code }}</td>
                   <td>{{ soutenance?.sujet.titre }}</td>
+                  <td> <button 
+                     class="btn btn-outline-danger" 
+                     (click)="deleteSoutenance(soutenance.id)">
+                     <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button> </td>
                 </tr>
                 <!-- <tr>
                   <td>Tiger Nixon</td>

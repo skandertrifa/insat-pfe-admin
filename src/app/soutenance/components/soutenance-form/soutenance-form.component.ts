@@ -8,6 +8,9 @@ import { SalleService } from '../../services/salle.service';
 import { SessionService } from '../../services/session.service';
 import { SoutenanceService } from '../../services/soutenance.service';
 import { SujetService } from '../../services/sujet.service';
+import { ToastrService } from 'ngx-toastr';
+import { SoutenanceValidation } from '../../enums/soutenance-validation.enum';
+import { faPrint } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-soutenance-form',
@@ -21,7 +24,7 @@ export class SoutenanceFormComponent implements OnInit {
 
   @Input()
   id?: number ;
-
+  
   sessions : Session[] = []
   selectedSession : Session
   salles : Salle[] = []
@@ -45,13 +48,14 @@ export class SoutenanceFormComponent implements OnInit {
     private juryService: JuryService,
     private sujetService: SujetService,
     private route : ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private toastrService: ToastrService) { }
 
   checkExistance(object) : boolean
   {
     for (let feature in object){
       
-      if (object[feature] ===null)
+      if (object[feature] ===null || object[feature] ===undefined )
         return false
     }
     return true
@@ -82,7 +86,7 @@ export class SoutenanceFormComponent implements OnInit {
           if (response.sujet.id===sujet.id)
           this.selectedSujet = sujet;
         }
-        console.log("soutenance by ID : ",response)
+        
 
       })
   }
@@ -113,6 +117,26 @@ export class SoutenanceFormComponent implements OnInit {
       })
   }
 
+  validateForm(soutenance) : SoutenanceValidation{
+
+    if(soutenance.dateDePassage<=this.selectedSession.dateDebut  ||
+        soutenance.dateDePassage>=this.selectedSession.dateFin)
+        return SoutenanceValidation.DateDePassageError 
+    
+    return SoutenanceValidation.valid
+
+  }
+
+  validation(fromState : SoutenanceValidation) : boolean {
+    if (fromState ===SoutenanceValidation.DateDePassageError  )
+    {
+      this.toastrService.error("Vérifier la date de passage de la soutenance par rapport à la session");
+      return false
+    }
+
+    return true
+
+  }
 
   ngOnInit(): void {
     
@@ -132,19 +156,37 @@ export class SoutenanceFormComponent implements OnInit {
     this.soutenance["sujetId"]=this.selectedSujet?.id
     return this.soutenance
   }
-  createSoutenance(){
+  createSoutenance() : boolean{
 
     if (!this.checkExistance(this.getSoutenanceForm())){
-      return ;
+      this.toastrService.error("Veuillez Entrer tous les champs");
+      return false;
     }
+    
+    const validForm =this.validateForm(this.soutenance)
+    if(!this.validation(validForm))
+      return false;
+
+    let check=false
     this.soutenanceService.createSoutenance(this.getSoutenanceForm()).subscribe(
       (response) =>{
-        console.log(response)
+        check=true;
+        this.toastrService.success("La soutenance est Crée avec succès");
+        this.navigate("../")
+        
+        
+      },
+      (erreur) => {
+        check=false
+        this.toastrService.error("Erreur");
+        
+        
       }
-    )   
+    )
+    return check
   }
 
-  modifySoutenance(){
+  modifySoutenance() : boolean{
     
     const modifySoutenance :Partial<CreateSoutenance>={}
     for (let feature in this.getSoutenanceForm())
@@ -153,21 +195,37 @@ export class SoutenanceFormComponent implements OnInit {
         modifySoutenance[feature]=this.soutenance[feature]
 
     }
-    
+    const validForm =this.validateForm(this.soutenance)
+    if(!this.validation(validForm))
+      return false;
+      
     this.soutenanceService.modifySoutenance(modifySoutenance,this.id).subscribe(
       (response) =>{
-        console.log(response)
+        this.toastrService.success("La soutenance est Modifiée avec succès");
+        this.navigate("../../")
+        return true
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
+        return false
       }
-    )   
+    )
+    return true   
   }
   
-  deleteSoutenance(){
+  deleteSoutenance() : boolean{
     
     this.soutenanceService.deleteSoutenance(this.id).subscribe(
       (response) =>{
+        this.toastrService.success("La soutenance est Supprimée avec succès");
         return true
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
+        return false
       }
-    )   
+    )
+    return true   
   }
   navigate(relativeUrl : string){
     this.router.navigate([relativeUrl],{relativeTo: this.route})
@@ -175,11 +233,12 @@ export class SoutenanceFormComponent implements OnInit {
   submit(){
     if (this.role === "creer" ){
       this.createSoutenance()
-      this.navigate("../")
+        
     }
     else if (this.role === "modifier" ){
+
       this.modifySoutenance()
-      this.navigate("../../")
+        
     }
   }
   

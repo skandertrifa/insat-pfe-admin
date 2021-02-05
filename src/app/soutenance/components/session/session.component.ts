@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { CreateSession } from '../../models/create-soutenance';
 import { Annee, Session } from '../../models/soutenance';
 import { AnneeService } from '../../services/annee.service';
 import { SessionService } from '../../services/session.service';
-
+import {SessionValidation} from '../../enums/session-validation.enum'
 @Component({
   selector: 'app-session',
   templateUrl: './session.component.html',
   styleUrls: ['./session.component.css']
 })
 export class SessionComponent implements OnInit {
+  
   annees : Annee[] = []
   selectedAnnee : Annee
   sessions : Session[] = []
@@ -21,7 +23,8 @@ export class SessionComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
-    private anneeService: AnneeService) { }
+    private anneeService: AnneeService,
+    private toastrService: ToastrService) { }
 
   checkExistance(object) : boolean
   {
@@ -33,6 +36,26 @@ export class SessionComponent implements OnInit {
     return true
 
   }
+  validateForm(session) : SessionValidation{
+
+    if(session.dateDebut>=session.dateFin)
+        return SessionValidation.dateRangeError 
+    
+    return SessionValidation.valid
+
+  }
+
+  validation(fromState : SessionValidation) : boolean {
+    if (fromState ===SessionValidation.dateRangeError )
+    {
+      this.toastrService.error("Vérifier la date de début et de fin de session");
+      return false
+    }
+
+    return true
+
+  }
+
   loadAnnees(){
     this.anneeService.getAnnees().subscribe(
       (response) => {
@@ -57,14 +80,26 @@ export class SessionComponent implements OnInit {
     return this.session
   }
   createSession(){
-    this.session = this.getSessionForm();
-    if (!this.checkExistance(this.session)){
+    
+    if (this.selectedAnnee===null || !this.checkExistance(this.getSessionForm())  ){
+      console.log("session : ",this.session)
+      this.toastrService.error("Veuillez Entrer tous les champs");
       return ;
     }
+    
+    const validForm =this.validateForm(this.session)
+    if(!this.validation(validForm))
+      return ;
+  
     this.sessionService.createSession(this.session).subscribe(
       (response) =>{
         this.loadSessions()
+        this.toastrService.success("La session est Crée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
       }
+
     )
   }
 
@@ -79,10 +114,17 @@ export class SessionComponent implements OnInit {
     }
     if (this.selectedAnnee)
       modifySession.anneeId=this.selectedAnnee.id
-    console.log("modifySession : ",modifySession)
+    
+      const validForm =this.validateForm(this.session)
+    if(!this.validation(validForm))
+      return ;
     this.sessionService.modifySession(modifySession,this.selectedSession.id).subscribe(
       (response) =>{
         this.loadSessions()
+        this.toastrService.success("La session est Modifiée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
       }
     )
   }
@@ -92,8 +134,13 @@ export class SessionComponent implements OnInit {
     this.sessionService.deleteSession(this.selectedSession.id).subscribe(
       (response) =>{
         this.loadSessions()
+        this.toastrService.success("La session est Supprimée avec succès");
+      },
+      (erreur) => {
+        this.toastrService.error("Erreur");
       }
     )
+    
   }
 
 
@@ -117,11 +164,7 @@ export class SessionComponent implements OnInit {
 
 
   }
-  compareAnnee(c1: Annee, c2:number): boolean {
-    console.log("c1 : ",c1)
-    console.log("c2 : ",c2)
-    return c1.id === c2
-}
+  
 
 
 }

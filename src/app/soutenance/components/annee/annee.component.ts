@@ -45,6 +45,7 @@ export class AnneeComponent implements OnInit {
   }
   createAnnee(){
     if (!this.checkExistance(this.annee)){
+      this.toastrService.error("Veuillez Entrer tous les champs");
       return ;
     }
     this.anneeService.createAnnee(this.annee).subscribe(

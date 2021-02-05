@@ -3,7 +3,7 @@
   
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
             <h4 class="c-grey-900 mB-20">Session</h4>
-<form>
+<form #form="ngForm" >
   <div class="form-group">
     <label for="sessionExistante">Sélectionner une session deja existante</label>
     <select class="form-control" id="sessionExistante" [(ngModel)]="selectedSession" 
