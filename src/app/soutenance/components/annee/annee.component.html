@@ -6,10 +6,10 @@
 <form #form="ngForm">
   <div class="form-group" >
     <label for="anneeExistante">Sélectionner une annee deja existante</label>
-    <select class="form-control" id="anneeExistante" [(ngModel)]="selectedAnnee" name="selectedAnnee">
-      <option *ngFor="let annee of annees" [ngValue]="annee">{{annee.annee}}</option>
+    <ng-select  id="anneeExistante" [(ngModel)]="selectedAnnee" name="selectedAnnee">
+      <ng-option *ngFor="let annee of annees" [value]="annee">{{annee.annee}}</ng-option>
      
-    </select>
+    </ng-select>
   </div>
     <div class="form-group">
       <label for="annee">année</label>

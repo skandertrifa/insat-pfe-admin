@@ -15,13 +15,14 @@ export class AfficherSoutenancesComponent implements  OnInit {
   soutenances: Soutenances=new Soutenances();
   searchString : string = "";
   page: number=1
+  limit: number=10
   constructor(
     private soutenanceService: SoutenanceService,
     private toastrService: ToastrService
   ) { }
 
   loadsoutenances(){
-    this.soutenanceService.getSoutenances(this.page).subscribe(
+    this.soutenanceService.getSoutenances(this.page,this.limit).subscribe(
       (response) => {
         
         this.soutenances = response;
@@ -35,12 +36,7 @@ export class AfficherSoutenancesComponent implements  OnInit {
 
   setPage(page: number=1){
     this.page=page
-    this.soutenanceService.getSoutenances(this.page).subscribe(
-      (response) => {
-        console.log(response);
-        this.soutenances = response;
-        console.log(this.soutenances);
-      })
+    this.loadsoutenances()
     
   }
   deleteSoutenance(id : number){
@@ -57,6 +53,12 @@ export class AfficherSoutenancesComponent implements  OnInit {
       }
     )
        
+  }
+
+  onChange(){
+    this.page=1
+    this.loadsoutenances()
+    
   }
 
   

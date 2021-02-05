@@ -5,10 +5,10 @@
 <form #form="ngForm">
   <div class="form-group">
     <label for="salleExistante">Sélectionner une salle deja existante</label>
-    <select class="form-control" id="salleExistante" [(ngModel)]="selectedSalle" name="selectedSalle">
-      <option *ngFor="let salle of salles" [ngValue]="salle">{{salle.code}}</option>
+    <ng-select id="salleExistante" [(ngModel)]="selectedSalle" name="selectedSalle">
+      <ng-option *ngFor="let salle of salles" [value]="salle">{{salle.code}}</ng-option>
      
-    </select>
+    </ng-select>
   </div>
     <div class="form-group">
       <label for="salle">Code du salle</label>
