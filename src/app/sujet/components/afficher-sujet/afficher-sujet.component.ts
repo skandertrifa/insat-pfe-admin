@@ -1,6 +1,8 @@
+import { Sujet } from './../../model/sujet';
 import { Component, OnInit } from '@angular/core';
 import { Sujets } from 'src/app/sujet/model/sujet';
 import { SujetService } from '../../services/sujet.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-afficher-sujet',
@@ -12,8 +14,13 @@ export class AfficherSujetComponent implements OnInit {
   sujets: Sujets=null;
   searchString : string = "";
   page: number=1
+  sujetUpdate : Sujet;
+  modalUpdateSujet =false;
+  route: any;
   constructor(
-    private sujetService: SujetService
+    private sujetService: SujetService,
+    private toastrService: ToastrService
+
   ) { }
 
 
@@ -76,13 +83,48 @@ export class AfficherSujetComponent implements OnInit {
 
   handleDeleteSujet(id:number){
     console.log('handle delete sujet')
-    this.sujetService.deleteSujet(+id).subscribe((response)=>{})
-    let index = null
-    for(let i=0;i<this.sujets.items.length;i++){
-      if (this.sujets.items[i].id == id)
-      {index = i}
-    }
+    this.sujetService.deleteSujet(+id).subscribe((response)=>{
+      let index = null
+      for(let i=0;i<this.sujets.items.length;i++){
+        if (this.sujets.items[i].id == id)
+        {index = i}
+      }
     this.sujets.items.splice(index,1)
+      this.toastrService.success("la Suppression du sujet a été effectué avec succeès :)");
+    },
+    (erreur) => {
+      this.toastrService.error("Echec de la supression du sujet");
+    })
+
   }
+
+  handleUpdateSujetButton(sujet:Sujet){
+    this.sujetUpdate = sujet;
+    console.log(sujet);
+    this.handleUpdateSujet();
+  }
+
+  handleUpdateSujet(){
+    this.modalUpdateSujet= !this.modalUpdateSujet;
+}
+
+
+updateSujetMethod(updateSujet): void{
+  console.log(updateSujet);
+  this.sujetService.updateSujet(updateSujet.value,+this.sujetUpdate.id).subscribe(
+    (response) => {
+      this.toastrService.success("la modification du sujet a été effectué avec succeès :)");
+/*       this.route.queryParams.subscribe((params) => {
+        //this.getStudentsPaginated(+params.page,+params.limit);
+      }); */
+      this.setPage(this.page);
+      this.handleUpdateSujet();
+    },
+    (erreur) => {
+      this.toastrService.error("Echec de la modification du sujett");
+    }
+    );
+
+}
 
 }

@@ -21,7 +21,14 @@ export class Sujet extends TimeStamp{
   description: string;
   rapportPfe:RapportPfe;
   etudiant : Student;
+  encadrant: Encadrant;
+  approved:boolean;
 
+}
+
+class Encadrant extends TimeStamp {
+  id: number;
+  userDetails: UserDetails;
 }
 
 class Student extends TimeStamp {
