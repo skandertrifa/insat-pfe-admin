@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css?family=Viga&display=swap");
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-download {
+  outline: none;
+  border: none;
+  background: #707070;
+  padding: 15px 25px;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.button-download::before {
+  content: "";
+  width: 5px;
+  height: 100%;
+  background: #1770b8;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: 0.5s;
+}
+
+.button-download:hover::before {
+  width: 100%;
+  z-index: 0;
+}
+
+.button-download__icon {
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: bottom;
+  position: relative;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.button-download__label {
+  font-family: "Viga";
+  color: #fff;
+  font-size: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  position: relative;
+  z-index: 1;
+  transition: 0.6s ease-in-out;
+  letter-spacing: 0.8px;
+}
+
+.button-download:hover .button-download__label {
+  transform: translateX(1px);
+}
+
+.button-download:hover .button-download__icon {
+  opacity: 0;
+  animation: move;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(200%);
+  }
+}
+
+.dialog-title {
+  margin: 0;
+  padding: 15px;
+  font-size: 120%;
+  font-weight: 400;
+  background-color: white;
+  color: black;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.dialog-container {
+  margin-bottom: 30px;
+}
+
+.full-width {
+  width: 96%;
+}
+
+.submit-btn {
+  padding: 12px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.submit-btn:hover {
+  background-color: #113f67;
+}
+
+.submit-btn[disabled] {
+  opacity: 65%;
+  cursor: not-allowed;
+}

@@ -33,6 +33,7 @@ import { TeachersComponent } from './teachers/teachers.component';
 import { AddTeacherComponent } from './teachers/add-teacher/add-teacher.component';
 import { EditTeacherComponent } from './teachers/edit-teacher/edit-teacher.component';
 import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher.component';
+import { DeleteStudentComponent } from './students/delete-student/delete-student.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher
     AddTeacherComponent,
     EditTeacherComponent,
     DeleteTeacherComponent,
+    DeleteStudentComponent,
   ],
   imports: [
     CommonModule,

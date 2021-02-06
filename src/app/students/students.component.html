@@ -3,7 +3,7 @@
   rel="stylesheet"
 />
 
-<main class="main-content bgc-grey-100">
+<main class="main-content bgc-grey-50">
   <div id="mainContent">
     <div class="container-fluid">
       <h4 class="c-grey-900 mT-10 mB-30">Tableau</h4>
@@ -284,6 +284,14 @@
                       >
                         Envoyer
                       </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        (click)="handleAddStudentExcel()"
+                      >
+                        Annuler
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -469,6 +477,15 @@
                         (click)="addStudentManuallyForm(addStudentManually)"
                       >
                         Enregistrer
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        (click)="handleAddStudentManually()"
+                      >
+                        Annuler
                       </button>
                     </div>
                   </form>
@@ -662,6 +679,14 @@
                       >
                         Enregistrer
                       </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        (click)="handleUpdateStudentManually()"
+                      >
+                        Annuler
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -682,28 +707,8 @@
                   <th>Supprimer</th>
                 </tr>
               </thead>
-              <!-- <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
-              </tfoot> -->
+
               <tbody>
-                <!-- <tr
-                  *ngFor="
-                    let student of students
-                      | studentSearch
-                        : {
-                            cin: searchString,
-                            filiere: searchString,
-                            email: searchString
-                          }
-                  "
-                > -->
                 <tr *ngFor="let student of students | filter: searchString">
                   <td>{{ student.cin }}</td>
                   <td>{{ student.filiere }}</td>
@@ -728,14 +733,6 @@
                     </button>
                   </td>
                 </tr>
-                <!-- <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr> -->
               </tbody>
             </table>
             <div class="row">
@@ -767,31 +764,10 @@
                         [queryParams]="{ page: i + 1 }"
                         queryParamsHandling="merge"
                       >
-                        <!-- <a
-                    [class.disabled]="i + 1 === currentPage ? true : null"
-                    (click)="check($event, i + 1)"
-                    class="page-link"
-                    [href]="
-                      'http://localhost:4200/Students?page=' +
-                      (i + 1) +
-                      '&limit=' +
-                      selectedLimit
-                    "
-                  > -->
                         {{ i + 1 }}
                       </a>
                     </li>
-
-                    <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                     <li class="page-item">
-                      <!-- <a
-                    [class.disabled]="nextPage === '' ? true : null"
-                    (click)="checkNextPage($event)"
-                    class="page-link"
-                    [href]="nextPage"
-                    >Suivant</a
-                  > -->
                       <a
                         [class.disabled]="nextPage === '' ? true : null"
                         (click)="checkNextPage($event)"

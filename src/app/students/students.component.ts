@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Student } from '../models/student';
 import { StudentService } from '../services/student.service';
+import { DeleteStudentComponent } from './delete-student/delete-student.component';
 
 @Component({
   selector: 'app-students',
@@ -40,7 +42,8 @@ export class StudentsComponent implements OnInit {
     private studentService: StudentService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -88,7 +91,6 @@ export class StudentsComponent implements OnInit {
     getStudentsPaginated(page: number,limit: number){
       this.studentService.getStudentsPaginated(page,limit).subscribe(
         (response) => {
-          console.log(response);
           this.students = response.items;
           //links
           this.firstPage = response.links.first;
@@ -112,18 +114,26 @@ export class StudentsComponent implements OnInit {
       );
     }
     handleDeleteStudent(id: number): void{
-      console.log(id);
-      this.studentService.deleteStudent(id).subscribe(
-        (response) => {
-          this.route.queryParams.subscribe((params) => {
-            this.selectedLimit = params.limit;
-            this.getStudentsPaginated(+params.page,+params.limit);
-          }
-          );}
-      );
+      const dialogRef = this.dialog.open(DeleteStudentComponent, {
+
+        width: '600px',
+        panelClass: 'custom-dialog-container',
+        data: id
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getStudentsPaginated(1, 10) ;
+      });
+      // console.log(id);
+      // this.studentService.deleteStudent(id).subscribe(
+      //   (response) => {
+      //     this.route.queryParams.subscribe((params) => {
+      //       this.selectedLimit = params.limit;
+      //       this.getStudentsPaginated(+params.page,+params.limit);
+      //     }
+      //     );}
+      // );
     }
     addStudentManuallyForm(addStudentManually: NgForm):void{
-      console.log(addStudentManually.value);
       this.studentService.addStudentManually(addStudentManually.value).subscribe(
         (response) => {
           this.toastrService.success("l'ajout de l'étudiant a été effectué avec succeès :)");
@@ -157,7 +167,6 @@ export class StudentsComponent implements OnInit {
       this.studentService.addStudentsFromExcel(fd).subscribe(
         (response) => {
           //this.toas
-          console.log(response);
           this.toastrService.success('Opération effectué avec succès!');
           this.route.queryParams.subscribe((params) => {
             this.selectedLimit = params.limit;
@@ -173,7 +182,6 @@ export class StudentsComponent implements OnInit {
     }
 
     updateStudentManuallyForm(updateStudentManually): void{
-      console.log(updateStudentManually);
       this.studentService.updateStudent(updateStudentManually.value).subscribe(
         (response) => {
           this.toastrService.success("la modification de l'étudiant a été effectué avec succeès :)");
@@ -195,7 +203,6 @@ export class StudentsComponent implements OnInit {
       //console.log(student);
       //console.log(studentId);
       this.studentUpdate = student;
-      console.log(student);
       this.handleUpdateStudentManually();
 
     }
