@@ -110,6 +110,8 @@ rel="stylesheet"
                     La Date est Obligatoire
                   </div>
 
+
+
                   <!--Approved-->
                   <label for="approved">Approuvé le sujet</label><br>
                   <input
@@ -123,6 +125,8 @@ rel="stylesheet"
                     name="approved"
                     #sujetApprovedInput="ngModel"
                   />
+
+
 
                 </div>
                 <div class="modal-footer">
@@ -168,7 +172,9 @@ rel="stylesheet"
                 <th>Date Limite Rapport</th>
                 <th>Etudiant</th>
                 <th>Encadrant</th>
+                <th>Fiche de proposition</th>
                 <th>Rapport</th>
+                <th>Lettre Affirmation</th>
                 <th>Etat</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
@@ -211,6 +217,19 @@ rel="stylesheet"
                 </td>
 
                 <td>
+                  <button (click)="handleDownloadFicheProposition(
+                  sujet.fichePropositionPfe.id,
+                  'FichePropositionPfe_'+
+                  sujet.etudiant.userDetails.nom+'_'+
+                  sujet.etudiant.userDetails.prenom+'_'+
+                  sujet.etudiant.idEtudiant+'.pdf')" >
+                  <span style="font-size: 24px; color: Dodgerblue;">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                </span>
+                </button>
+                </td>
+
+                <td>
                   <button *ngIf="sujet.rapportPfe" (click)="handleDownloadRapportPfe(sujet.rapportPfe.id,
                   'RapportPfe_'+
                   sujet.etudiant.userDetails.nom+'_'+
@@ -229,6 +248,32 @@ rel="stylesheet"
                     Pas Encore
                   </button>
                 </td>
+
+                <!--Lettre Affirmation-->
+                <td>
+                  <button *ngIf="sujet.lettreAffectationPfe" (click)="handleDownloadLettreAffirmation(
+                  sujet.lettreAffectationPfe.id,
+                  'LettreAffirmationPfe_'+
+                  sujet.etudiant.userDetails.nom+'_'+
+                  sujet.etudiant.userDetails.prenom+'_'+
+                  sujet.etudiant.idEtudiant+'.pdf')" >
+                  <span style="font-size: 24px; color: Dodgerblue;">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                </span>
+                </button>
+                  <input *ngIf="!sujet.lettreAffectationPfe"
+                  type="file"
+                  ngModel
+                  title=" "
+                  id="lettreAffirmation"
+                  name="lettreAffirmation"
+                  #lettreAffirmation
+                  (change)="onFicheChange($event,sujet.id)"
+                  class="hidden"
+                  style="float:left; width:88px; color:#000000;"
+                  />
+                </td>
+
                 <td>
 
                   <button

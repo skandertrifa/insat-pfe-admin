@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./afficher-sujet.component.css']
 })
 export class AfficherSujetComponent implements OnInit {
-
+  private file : File
   sujets: Sujets=null;
   searchString : string = "";
   page: number=1
@@ -28,6 +28,7 @@ export class AfficherSujetComponent implements OnInit {
     this.sujetService.getSujets(this.page).subscribe(
       (response) => {
         this.sujets = response;
+        console.log(this.sujets)
       })
   }
 
@@ -37,20 +38,49 @@ export class AfficherSujetComponent implements OnInit {
     this.sujetService.getSujets(this.page).subscribe(
       (response) => {
         this.sujets = response;
+        console.log(this.sujets)
       })
+
+  }
+
+  onFicheChange(fileChangeEvent,idSujet) {
+    let formData = new FormData();
+    this.file = fileChangeEvent.target.files[0];
+    formData.append('lettreAffirmation',this.file,this.file.name)
+    console.log('hereeeeeeeeeee')
+    this.sujetService.uploadLettre(idSujet,formData).subscribe(
+      (response)=>{
+        this.toastrService.success("la modification du sujet a été effectué avec succeès :)");
+        this.setPage(this.page);
+      },
+      (error)=>{
+        this.toastrService.error("Echec de la modification du sujet");
+      }
+    )
 
   }
 
   handleDownloadRapportPfe(rapportID:number,filename:string){
     this.sujetService.downloadRapport(rapportID).subscribe(
       (response)=>{
-/*         const url = URL.createObjectURL(new Blob([response.data]));
-        window.open(url); */
         this.downloadBlob(new Blob([response.data]),filename)
       }
     );
   }
-
+  handleDownloadFicheProposition(ficheId:number,filename:string){
+    this.sujetService.downloadFiche(ficheId).subscribe(
+      (response)=>{
+        this.downloadBlob(new Blob([response.data]),filename)
+      }
+    );
+  }
+  handleDownloadLettreAffirmation(lettreID:number,filename:string){
+    this.sujetService.downloadLettre(lettreID).subscribe(
+      (response)=>{
+        this.downloadBlob(new Blob([response.data]),filename)
+      }
+    );
+  }
   downloadBlob(blob, name = 'file.txt') {
     if (
       window.navigator &&
@@ -114,9 +144,6 @@ updateSujetMethod(updateSujet): void{
   this.sujetService.updateSujet(updateSujet.value,+this.sujetUpdate.id).subscribe(
     (response) => {
       this.toastrService.success("la modification du sujet a été effectué avec succeès :)");
-/*       this.route.queryParams.subscribe((params) => {
-        //this.getStudentsPaginated(+params.page,+params.limit);
-      }); */
       this.setPage(this.page);
       this.handleUpdateSujet();
     },

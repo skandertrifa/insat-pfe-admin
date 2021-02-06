@@ -20,6 +20,9 @@ export class Sujet extends TimeStamp{
   dateLimiteDepot: Date;
   description: string;
   rapportPfe:RapportPfe;
+  fichePropositionPfe: FicheProposition;
+  //don't get confused by the name (affirmation or affectation is the same thing)
+  lettreAffectationPfe : LettreAffirmation;
   etudiant : Student;
   encadrant: Encadrant;
   approved:boolean;
@@ -50,5 +53,13 @@ export class RapportPfe extends TimeStamp{
   path: string;
 }
 
+export class FicheProposition extends TimeStamp{
+  id: number;
+  path: string;
+}
 
+export class LettreAffirmation extends TimeStamp{
+  id: number;
+  path: string;
+}
 
