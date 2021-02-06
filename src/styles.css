@@ -6,6 +6,7 @@
 @import "angular-calendar/css/angular-calendar.css";
 @import 'flatpickr/dist/flatpickr.css';
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 .custom-dialog-container .mat-dialog-container {
   border-radius: 5% !important; ;

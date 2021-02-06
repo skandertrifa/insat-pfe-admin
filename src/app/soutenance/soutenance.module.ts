@@ -18,8 +18,8 @@ import { SalleComponent } from './components/salle/salle.component';
 import { JuryComponent } from './components/jury/jury.component';
 import { SujetComponent } from './components/sujet/sujet.component';
 import { SoutenanceFormComponent } from './components/soutenance-form/soutenance-form.component';
-
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { SoutenanceFormComponent } from './components/soutenance-form/soutenance
   ],
   imports: [
     CommonModule,
+    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -47,7 +48,7 @@ import { SoutenanceFormComponent } from './components/soutenance-form/soutenance
     Ng2SearchPipeModule,
     NgbModule,
     FlatpickrModule.forRoot(),
-
+    MatAutocompleteModule,
     SoutenanceRoutingModule,
     
   ],

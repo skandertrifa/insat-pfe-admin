@@ -71,7 +71,7 @@ export class JuryComponent implements OnInit {
   validation(fromState : JuryValidation) : boolean {
     if (fromState ===JuryValidation.DuplicateError )
     {
-      this.toastrService.error("Les membres de la juries doivent etre unique");
+      this.toastrService.error("Les membres de la jury doivent etre unique");
       return false
     }
 

@@ -15,8 +15,8 @@ const SOUTENANCE_API = 'http://127.0.0.1:3000/soutenance';
 export class SoutenanceService implements Resolve<any> {
 
   constructor(private http: HttpClient) { }
-  getSoutenances(page : number=1): Observable<any> {
-    return this.http.get<any>(SOUTENANCE_API+`?page=${page}`);
+  getSoutenances(page : number=1 ,limit : number=10): Observable<any> {
+    return this.http.get<any>(SOUTENANCE_API+`?page=${page}&limit=${limit}`);
   }
 
   resolve() {

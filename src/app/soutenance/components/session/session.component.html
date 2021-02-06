@@ -6,11 +6,11 @@
 <form #form="ngForm" >
   <div class="form-group">
     <label for="sessionExistante">Sélectionner une session deja existante</label>
-    <select class="form-control" id="sessionExistante" [(ngModel)]="selectedSession" 
+    <ng-select id="sessionExistante" [(ngModel)]="selectedSession" 
     name="selectedSession" (change)="updateForm()">
-      <option *ngFor="let session of sessions" [ngValue]="session">{{session.name}}</option>
+      <ng-option *ngFor="let session of sessions" [value]="session">{{session.name}}</ng-option>
      
-    </select>
+    </ng-select>
   </div>
     <div class="form-group">
       <label for="name">Nom de session</label>
@@ -29,11 +29,11 @@
       </div>
       <div class="form-group">
         <label for="annee">Annee de session</label>
-      <select class="form-control" id="annee" [(ngModel)]="selectedAnnee" 
+      <ng-select id="annee" [(ngModel)]="selectedAnnee" 
       name="annee">
-        <option *ngFor="let annee of annees" [ngValue]="annee">{{annee.annee}}</option>
+        <ng-option *ngFor="let annee of annees" [value]="annee">{{annee.annee}}</ng-option>
        
-      </select>
+      </ng-select>
     </div>
     <div class="container">
     <div class="row justify-content-md-center">

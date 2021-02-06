@@ -60,14 +60,17 @@ export class StudentsComponent implements OnInit {
     handleAddStudentExcel(): void{
       this.modalAddStudentExcel = !this.modalAddStudentExcel;
     }
+
     handleUpdateStudentManually(): void{
         this.modalUpdateStudentManually = !this.modalUpdateStudentManually;
     }
+
     check = (event: any,x: number) => {
      if (this.currentPage === x) {
        event.preventDefault();
      }
     }
+
     checkNextPage = (event: any) => {
      if (this.nextPage === "") {
        event.preventDefault();
