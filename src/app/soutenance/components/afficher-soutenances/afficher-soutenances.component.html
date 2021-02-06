@@ -129,8 +129,8 @@
                     </button>
 
                   </td>
-                  <td>{{ soutenance?.salle.code }}</td>
-                  <td>{{ soutenance?.sujet.titre }}</td>
+                  <td>{{ soutenance?.salle?.code }}</td>
+                  <td>{{ soutenance?.sujet?.titre }}</td>
                   <td> <button 
                      class="btn btn-outline-danger" 
                      (click)="deleteSoutenance(soutenance.id)">
