@@ -41,33 +41,52 @@
     </div>
 
     <!-- ### $Sidebar Menu ### -->
-    <ul class="sidebar-menu scrollable pos-r">
-      <li class="nav-item mT-30 actived">
-        <a class="sidebar-link" routerLink="/Dashbord">
+    <ul class="list-group sidebar-menu scrollable pos-r">
+      <li
+        class="nav-item mT-30 actived"
+        [ngClass]="url === '/Dashbord' ? 'activateNav' : ''"
+      >
+        <a
+          class="sidebar-link"
+          routerLink="/Dashbord"
+          (click)="changeUrl('/Dashbord')"
+        >
           <span class="icon-holder">
             <i class="c-blue-500 ti-home"></i>
           </span>
           <span class="title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Students">
+      <li class="nav-item" [ngClass]="url === '/Students' ? 'activateNav' : ''">
+        <a
+          class="sidebar-link"
+          routerLink="/Students"
+          (click)="changeUrl('/Students')"
+        >
           <span class="icon-holder">
             <i class="c-brown-500 ti-user"></i>
           </span>
           <span class="title">Etudiants</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Teachers">
+      <li class="nav-item" [ngClass]="url === '/Teachers' ? 'activateNav' : ''">
+        <a
+          class="sidebar-link"
+          routerLink="/Teachers"
+          (click)="changeUrl('/Teachers')"
+        >
           <span class="icon-holder">
             <i class="c-red-500 ti-user"></i>
           </span>
           <span class="title">Enseignants</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Calendar">
+      <li class="nav-item" [ngClass]="url === '/Calendar' ? 'activateNav' : ''">
+        <a
+          class="sidebar-link"
+          routerLink="/Calendar"
+          (click)="changeUrl('/Calendar')"
+        >
           <span class="icon-holder">
             <i class="c-blue-500 ti-calendar"></i>
           </span>
@@ -75,8 +94,12 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Sujet">
+      <li class="nav-item" [ngClass]="url === '/Sujet' ? 'activateNav' : ''">
+        <a
+          class="sidebar-link"
+          routerLink="/Sujet"
+          (click)="changeUrl('/Sujet')"
+        >
           <span class="icon-holder">
             <i class="c-deep-purple-500 ti-bookmark"></i>
           </span>
@@ -84,8 +107,15 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Soutenance">
+      <li
+        class="nav-item"
+        [ngClass]="url === '/Soutenance' ? 'activateNav' : ''"
+      >
+        <a
+          class="sidebar-link"
+          routerLink="/Soutenance"
+          (click)="changeUrl('/Soutenance')"
+        >
           <span class="icon-holder">
             <i class="c-deep-purple-500 ti-bookmark"></i>
           </span>
@@ -93,44 +123,64 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Soutenance/Annee">
+      <li
+        class="nav-item"
+        [ngClass]="url === '/Soutenance/Annee' ? 'activateNav' : ''"
+      >
+        <a
+          class="sidebar-link"
+          routerLink="/Soutenance/Annee"
+          (click)="changeUrl('/Soutenance/Annee')"
+        >
           <span class="icon-holder">
             <i class="c-pink-500 ti-time"></i>
           </span>
           <span class="title">Annee</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Soutenance/Session">
+      <li
+        class="nav-item"
+        [ngClass]="url === '/Soutenance/Session' ? 'activateNav' : ''"
+      >
+        <a
+          class="sidebar-link"
+          routerLink="/Soutenance/Session"
+          (click)="changeUrl('/Soutenance/Session')"
+        >
           <span class="icon-holder">
             <i class="c-orange-500 ti-credit-card"></i>
           </span>
           <span class="title">Session</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Soutenance/Salle">
+      <li
+        class="nav-item"
+        [ngClass]="url === '/Soutenance/Salle' ? 'activateNav' : ''"
+      >
+        <a
+          class="sidebar-link"
+          routerLink="/Soutenance/Salle"
+          (click)="changeUrl('/Soutenance/Salle')"
+        >
           <span class="icon-holder">
             <i class="c-deep-brown-500 ti-info"></i>
           </span>
           <span class="title">Salle</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="sidebar-link" routerLink="/Soutenance/Jury">
+      <li
+        class="nav-item"
+        [ngClass]="url === '/Soutenance/Jury' ? 'activateNav' : ''"
+      >
+        <a
+          class="sidebar-link"
+          routerLink="/Soutenance/Jury"
+          (click)="changeUrl('/Soutenance/Jury')"
+        >
           <span class="icon-holder">
             <i class="c-cyan-500 ti-bag"></i>
           </span>
           <span class="title">Jury</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="sidebar-link" href="email.html">
-          <span class="icon-holder">
-            <i class="c-deep-purple-500 ti-bookmark"></i>
-          </span>
-          <span class="title">Sujet</span>
         </a>
       </li>
     </ul>

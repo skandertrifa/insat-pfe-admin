@@ -534,7 +534,7 @@
                       <label for="Nom">Nom</label>
                       <input
                         ngModel
-                        [ngModel]="studentUpdate.userDetails.nom"
+                        [ngModel]="studentUpdate.nom"
                         required
                         type="text"
                         class="form-control"
@@ -552,7 +552,7 @@
                       <label for="Prenom">Prenom</label>
                       <input
                         ngModel
-                        [(ngModel)]="studentUpdate.userDetails.prenom"
+                        [ngModel]="studentUpdate.prenom"
                         required
                         name="prenom"
                         type="text"
@@ -572,7 +572,7 @@
                       <label for="CIN">CIN</label>
                       <input
                         ngModel
-                        [(ngModel)]="studentUpdate.cin"
+                        [ngModel]="studentUpdate.cin"
                         required
                         name="cin"
                         type="text"
@@ -590,7 +590,7 @@
                       <label for="idEtudiant">idEtudiant</label>
                       <input
                         ngModel
-                        [(ngModel)]="studentUpdate.idEtudiant"
+                        [ngModel]="studentUpdate.idEtudiant"
                         required
                         name="idEtudiant"
                         type="text"
@@ -614,7 +614,7 @@
                         class="custom-select d-block w-100"
                         id="Filiere"
                         name="filiere"
-                        [(ngModel)]="studentUpdate.filiere"
+                        [ngModel]="studentUpdate.filiere"
                         ngModel
                         required
                         #studentFiliereInput="ngModel"
@@ -639,7 +639,7 @@
                       <label for="Email">Email</label>
                       <input
                         ngModel
-                        [(ngModel)]="studentUpdate.userDetails.email"
+                        [ngModel]="studentUpdate.email"
                         required
                         type="email"
                         class="form-control"
@@ -697,12 +697,150 @@
             <table id="dataTable" class="table" cellspacing="0" width="100%">
               <thead class="thead-dark">
                 <tr>
-                  <th>CIN</th>
-                  <th>Filière</th>
-                  <th>Email</th>
-                  <th>Prenom</th>
-                  <th>Nom</th>
-                  <th>Sujet</th>
+                  <th
+                    scope="col"
+                    [appSort]="students"
+                    data-order="desc"
+                    data-name="cin"
+                    (click)="changeSortColumn('cin')"
+                  >
+                    CIN
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'asc' && sortColumn.name === 'cin'
+                      "
+                      class="fa fa-sort-asc"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'desc' && sortColumn.name === 'cin'
+                      "
+                      class="fa fa-sort-desc"
+                      aria-hidden="true"
+                    ></i>
+                  </th>
+                  <th
+                    scope="col"
+                    [appSort]="students"
+                    data-order="desc"
+                    data-name="filiere"
+                    (click)="changeSortColumn('filiere')"
+                  >
+                    Filière
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'asc' &&
+                        sortColumn.name === 'filiere'
+                      "
+                      class="fa fa-sort-asc"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'desc' &&
+                        sortColumn.name === 'filiere'
+                      "
+                      class="fa fa-sort-desc"
+                      aria-hidden="true"
+                    ></i>
+                  </th>
+                  <th
+                    scope="col"
+                    [appSort]="students"
+                    data-order="desc"
+                    data-name="email"
+                    (click)="changeSortColumn('email')"
+                  >
+                    Email
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'asc' && sortColumn.name === 'email'
+                      "
+                      class="fa fa-sort-asc"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'desc' &&
+                        sortColumn.name === 'email'
+                      "
+                      class="fa fa-sort-desc"
+                      aria-hidden="true"
+                    ></i>
+                  </th>
+                  <th
+                    scope="col"
+                    [appSort]="students"
+                    data-order="desc"
+                    data-name="prenom"
+                    (click)="changeSortColumn('prenom')"
+                  >
+                    Prenom
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'asc' &&
+                        sortColumn.name === 'prenom'
+                      "
+                      class="fa fa-sort-asc"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'desc' &&
+                        sortColumn.name === 'prenom'
+                      "
+                      class="fa fa-sort-desc"
+                      aria-hidden="true"
+                    ></i>
+                  </th>
+                  <th
+                    scope="col"
+                    [appSort]="students"
+                    data-order="desc"
+                    data-name="nom"
+                    (click)="changeSortColumn('nom')"
+                  >
+                    Nom
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'asc' && sortColumn.name === 'nom'
+                      "
+                      class="fa fa-sort-asc"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'desc' && sortColumn.name === 'nom'
+                      "
+                      class="fa fa-sort-desc"
+                      aria-hidden="true"
+                    ></i>
+                  </th>
+                  <th
+                    scope="col"
+                    [appSort]="students"
+                    data-order="desc"
+                    data-name="sujet"
+                    (click)="changeSortColumn('sujet')"
+                  >
+                    Sujet
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'asc' && sortColumn.name === 'sujet'
+                      "
+                      class="fa fa-sort-asc"
+                      aria-hidden="true"
+                    ></i>
+                    <i
+                      *ngIf="
+                        sortColumn.sort === 'desc' &&
+                        sortColumn.name === 'sujet'
+                      "
+                      class="fa fa-sort-desc"
+                      aria-hidden="true"
+                    ></i>
+                  </th>
                   <th>Modifier</th>
                   <th>Supprimer</th>
                 </tr>
@@ -712,9 +850,12 @@
                 <tr *ngFor="let student of students | filter: searchString">
                   <td>{{ student.cin }}</td>
                   <td>{{ student.filiere }}</td>
-                  <td>{{ student.userDetails.email }}</td>
+                  <!-- <td>{{ student.userDetails.email }}</td>
                   <td>{{ student.userDetails.prenom }}</td>
-                  <td>{{ student.userDetails.nom }}</td>
+                  <td>{{ student.userDetails.nom }}</td> -->
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.prenom }}</td>
+                  <td>{{ student.nom }}</td>
                   <td>{{ student.sujet }}</td>
                   <td>
                     <button

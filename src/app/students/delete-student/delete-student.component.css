@@ -95,7 +95,7 @@ body {
   background-color: white;
   color: black;
   text-align: center;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .dialog-container {
@@ -116,7 +116,7 @@ body {
   cursor: pointer;
 }
 .submit-btn:hover {
-  background-color: #113f67;
+  background-color: #960505;
 }
 
 .submit-btn[disabled] {
