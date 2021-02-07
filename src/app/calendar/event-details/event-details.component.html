@@ -25,6 +25,21 @@
         </mat-form-field>
       </div>
 
+      <div class="col-3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Heure de début</mat-label>
+          <input formControlName="startHour" matInput name="startHour" type="text" readonly/>
+        </mat-form-field>
+      </div>
+
+      <div class="col-3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Heure de Fin</mat-label>
+          <input formControlName="endHour" matInput name="endHour" type="text" readonly/>
+        </mat-form-field>
+      </div>
+
+
       <div class="col-6">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Date limite de depôt</mat-label>
@@ -32,21 +47,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-4">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Heure de début</mat-label>
-          <input formControlName="startHour" matInput name="startHour" type="text" readonly/>
-        </mat-form-field>
-      </div>
-
-      <div class="col-4">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Heure de Fin</mat-label>
-          <input formControlName="endHour" matInput name="endHour" type="text" readonly/>
-        </mat-form-field>
-      </div>
-
-      <div class="col-4">
+      <div class="col-6">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Salle</mat-label>
           <input formControlName="salle" matInput name="salle" type="text" readonly/>
@@ -63,11 +64,11 @@
       <div class="col-12">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Jury</mat-label>
-          <textarea formControlName="jury" [rows]='this.data.jury.length*2-1' matInput name="jury" type="text" readonly></textarea>
+          <textarea formControlName="jury" [rows]='4+this.data.jury.members.length*2-1' matInput name="jury" type="text" readonly></textarea>
         </mat-form-field>
       </div>
 
-      <a href="#" class="button-download mb-2">
+      <a (click)="downloadRapport()" class="button-download mb-2" target="_blank" style="cursor: pointer;">
         <span class="button-download__icon" data-feather="download"></span>
         <span class="button-download__label">Rapport PDF</span>
       </a>
