@@ -86,10 +86,11 @@ export class JuryComponent implements OnInit {
     return this.jury
   }
   createJury(){
+    this.jury=this.getJuryForm()
     if (!this.checkExistance(this.jury)){
       return ;
     }
-    this.jury=this.getJuryForm()
+    
     const validForm =this.validateForm(this.jury)
     if(!this.validation(validForm))
       return ;
