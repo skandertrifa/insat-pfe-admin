@@ -28,6 +28,7 @@ export class JuryComponent implements OnInit {
 
   checkExistance(object) : boolean
   {
+<<<<<<< HEAD
     
     if (object["president"] ===null)
       return false
@@ -37,26 +38,33 @@ export class JuryComponent implements OnInit {
     if (object["members"][1] ===null)
       return false
     
+=======
+    for (let feature in object){
+
+      if (object[feature] ===null)
+        return false
+    }
+>>>>>>> f2c9e5422ca2f4833b95dc0d1c404f8af84feb75
     return true
 
   }
-  
+
   loadJuries(){
     this.juryService.getJuries().subscribe(
       (response) => {
-        this.juries = response;        
+        this.juries = response;
       })
   }
   loadEnseignants(){
     this.enseignantService.getEnseignants().subscribe(
       (response) => {
-        this.enseignants = response;        
+        this.enseignants = response;
       })
   }
 
 
   ngOnInit(): void {
-    
+
     this.loadJuries()
     this.loadEnseignants()
   }
@@ -66,8 +74,8 @@ export class JuryComponent implements OnInit {
     if(jury.president===jury.members[0] ||
       jury.president===jury.members[1] ||
       jury.members[1]===jury.members[0])
-        return JuryValidation.DuplicateError 
-    
+        return JuryValidation.DuplicateError
+
     return JuryValidation.valid
 
   }
@@ -111,11 +119,11 @@ export class JuryComponent implements OnInit {
       (erreur) => {
         this.toastrService.error("Erreur");
       }
-    )   
+    )
   }
 
   modifyJury(){
-    
+
     const modifyJury :Partial<CreateJury>={}
     for (let feature in this.jury)
     {
@@ -143,11 +151,11 @@ export class JuryComponent implements OnInit {
       (erreur) => {
         this.toastrService.error("Erreur");
       }
-    )   
+    )
   }
-  
+
   deleteJury(){
-    
+
     this.juryService.deleteJury(this.selectedJury.id).subscribe(
       (response) =>{
         this.loadJuries()
@@ -156,15 +164,15 @@ export class JuryComponent implements OnInit {
       (erreur) => {
         this.toastrService.error("Erreur");
       }
-    )   
+    )
   }
-  
+
 
   updateForm(){
     this.jury["president"]=this.selectedJury.president.id
     this.jury["members"][0]=this.selectedJury.members[0].id
     this.jury["members"][1]=this.selectedJury.members[1].id
-    
+
     for(let enseignant of this.enseignants){
       if (enseignant.id===this.selectedJury.president.id){
         this.selectedPresident=enseignant
@@ -175,18 +183,30 @@ export class JuryComponent implements OnInit {
       if (enseignant.id===this.selectedJury.members[1].id){
         this.selectedMembers[1]=enseignant
       }
-    
+
 
     }
+<<<<<<< HEAD
     
     
     
     
     
     
+=======
+
+    console.log("selected jury : ",this.selectedJury)
+    console.log("selected president : ",this.selectedPresident)
+    console.log("selected member 0 : ",this.selectedMembers[0])
+    console.log("selected member 1 : ",this.selectedMembers[1])
+
+
+
+
+>>>>>>> f2c9e5422ca2f4833b95dc0d1c404f8af84feb75
   }
-  
-  
+
+
 
 
 }
