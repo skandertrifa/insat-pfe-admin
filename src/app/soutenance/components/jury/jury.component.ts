@@ -62,8 +62,8 @@ export class JuryComponent implements OnInit {
     if(jury.president===jury.members[0] ||
       jury.president===jury.members[1] ||
       jury.members[1]===jury.members[0])
-        return JuryValidation.DuplicateError 
-    
+        return JuryValidation.DuplicateError
+
     return JuryValidation.valid
 
   }
@@ -86,17 +86,6 @@ export class JuryComponent implements OnInit {
     return this.jury
   }
   createJury(){
-<<<<<<< HEAD
-    if (!this.checkExistance(this.jury)){
-      return ;
-    }
-    this.jury=this.getJuryForm()
-    const validForm =this.validateForm(this.jury)
-    if(!this.validation(validForm))
-      return ;
-
-=======
->>>>>>> animation
     this.juryService.createJury(this.getJuryForm()).subscribe(
       (response) =>{
         this.loadJuries()
