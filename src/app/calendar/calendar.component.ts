@@ -87,7 +87,12 @@ export class CalendarComponent implements OnInit {
     this._routes.data.subscribe((response: any) => {
       console.log(response);
       this.events = response.e;
-      this.events[0].start = new Date(response.e[0].start);
+      for (var i = 0; i < this.events.length; i++) {
+        this.events[i].start = new Date(response.e[i].start);
+        this.events[i].title = response.e[i].titre;
+        this.events[i].end = addHours(this.events[i].start, 1);
+      }
+
     })
     /*console.log(this.events);
     this.soutenanceService.getEvents().subscribe(

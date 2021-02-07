@@ -1,4 +1,4 @@
-     
+
       <div class="row">
         <div class="col-md-12">
           <div class="bgc-white bd bdrs-3 p-20 mB-20">
@@ -22,29 +22,29 @@
                       />
                     </div>
                   </div>
-                   
+
                 </div>
                 <div class="col-md-4 offset-md-4">
-                  
+
                     <!-- Right side put something here ! -->
                     <button
                       placeholder="Ajouter un etudiant"
                       class="btn btn-primary"
                       routerLink="creer"
                       >
-                      Creer une soutenance 
-                      
+                      Creer une soutenance
+
                     </button>
-                  
+
                 </div>
               </div>
                 <div class="row mb-5">
                 <div class="col-md-4">
-                  
+
                   <h5 style="color: rgb(31, 31, 31)">
                     Nombre de Soutenances par page
                   </h5>
-      
+
                   <select
                     name="dataTable_length"
                     aria-controls="dataTable"
@@ -61,12 +61,12 @@
                     <option value="50">50</option>
                     <option value="100">100</option>
                   </select>
-                
-                
+
+
                 </div>
               </div>
             </div>
-            
+
 
             <table
               id="dataTable"
@@ -84,7 +84,7 @@
                   <th>salle</th>
                   <th>Sujet</th>
                   <th>Effacer</th>
-                  
+
                 </tr>
               </thead>
               <!-- <tfoot>
@@ -111,7 +111,7 @@
                 > -->
                 <tr *ngFor="let soutenance of soutenances.items | filter: searchString">
                   <td><a routerLink="modifier/{{soutenance?.id}}"> {{ soutenance?.titre }} </a></td>
-                  <td>{{ soutenance?.dateDePassage }}</td>
+                  <td>{{ soutenance?.dateDePassage | date }}</td>
                   <td>{{ soutenance?.session?.annee?.annee }}</td>
                   <td>{{ soutenance?.session?.name }}</td>
                   <td>
@@ -122,8 +122,8 @@
                     </ng-template>
                     <button *ngIf="soutenance.jury"
                     type="button" class="btn btn-outline-secondary" popoverTitle="details jury"
-                    [autoClose]="true" 
-                    [ngbPopover]="popContent"           
+                    [autoClose]="true"
+                    [ngbPopover]="popContent"
                     #popover3="ngbPopover">
                       Details
                     </button>
@@ -131,8 +131,8 @@
                   </td>
                   <td>{{ soutenance?.salle?.code }}</td>
                   <td>{{ soutenance?.sujet?.titre }}</td>
-                  <td> <button 
-                     class="btn btn-outline-danger" 
+                  <td> <button
+                     class="btn btn-outline-danger"
                      (click)="deleteSoutenance(soutenance.id)">
                      <i class="fa fa-trash" aria-hidden="true"></i>
                     </button> </td>
@@ -152,25 +152,25 @@
                 <li class="page-item clickable" *ngIf="page>1">
                   <a class="page-link" (click)="setPage(page-1)">Précedent</a>
                 </li>
-                
-                
+
+
                   <li class="page-item clickable" *ngIf="page>2">
-                    <a class="page-link" (click)="setPage(page-2)"> 
+                    <a class="page-link" (click)="setPage(page-2)">
                       {{page-2}}
                     </a></li>
                     <li class="page-item clickable" *ngIf="page>1">
-                      <a class="page-link" (click)="setPage(page-1)"> 
+                      <a class="page-link" (click)="setPage(page-1)">
                         {{page-1}}
                       </a></li>
                 <li class="page-item active">
                   <a class="page-link" >{{page}}</a>
                 </li>
                 <li class="page-item clickable" *ngIf="page+1<=soutenances.totalPages">
-                  <a class="page-link" (click)="setPage(page+1)"> 
+                  <a class="page-link" (click)="setPage(page+1)">
                     {{page+1}}
                   </a></li>
                   <li class="page-item clickable" *ngIf="page+2<=soutenances.totalPages">
-                    <a class="page-link" (click)="setPage(page+2)"> 
+                    <a class="page-link" (click)="setPage(page+2)">
                       {{page+2}}
                     </a></li>
                 <li class="page-item clickable">
@@ -178,7 +178,7 @@
                 </li>
               </ul>
             </nav>
-            
+
           </div>
         </div>
       </div>
