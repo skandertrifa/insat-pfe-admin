@@ -1,3 +1,4 @@
+import { AddTeacherExcelComponent } from './add-teacher-excel/add-teacher-excel.component';
 import { DeleteTeacherComponent } from './delete-teacher/delete-teacher.component';
 import { EnseignantService } from './../services/enseignant.service';
 import { EditTeacherComponent } from './edit-teacher/edit-teacher.component';
@@ -68,8 +69,15 @@ export class TeachersComponent implements OnInit {
       });
     }
     // handleClick ajouter etudiant avec excel
-    handleAddStudentExcel(): void{
-      this.modalAddStudentExcel = !this.modalAddStudentExcel;
+    handleAddStudentExcel(limit): void{
+      const dialogRef = this.dialog.open(AddTeacherExcelComponent, {
+        animation: { to: "bottom" },
+        width: '600px',
+        panelClass: 'custom-dialog-container'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.getTeachersPaginated(1, limit) ;
+      });
     }
     check = (event: any,x: number) => {
      if (this.currentPage === x) {
@@ -134,38 +142,6 @@ export class TeachersComponent implements OnInit {
       });
     }
 
-    onFileChange(fileChangeEvent) {
-      this.file = fileChangeEvent.target.files[0];
-    }
-    addStudentsExcelForm(addStudentsExcel: NgForm):void{
-      let fd = new FormData();
-      //this.file, this.file.name
-      fd.append('students',this.file,this.file.name);
-      fd.append('nom',addStudentsExcel.value.nom);
-      fd.append('prenom',addStudentsExcel.value.prenom);
-      fd.append('email',addStudentsExcel.value.email);
-      fd.append('filiere',addStudentsExcel.value.filiere);
-      fd.append('cin',addStudentsExcel.value.cin);
-      fd.append('idEtudiant',addStudentsExcel.value.idEtudiant);
-      //console.log(fd.get('students'));
-
-      this.teacherService.addTeachersFromExcel(fd).subscribe(
-        (response) => {
-          //this.toas
-          console.log(response);
-          this.toastrService.success('Opération effectué avec succès!');
-          this.route.queryParams.subscribe((params) => {
-            this.selectedLimit = params.limit;
-            this.getTeachersPaginated(+params.page,+params.limit);
-          });
-          this.handleAddStudentExcel();
-        },
-        (erreur) => {
-          this.toastrService.error("Echec de l'opération :( ");
-        }
-      )
-
-    }
 
     handleUpdateStudentManuallyButton(teacher, page, limit): void{
       const dialogRef = this.dialog.open(EditTeacherComponent, {

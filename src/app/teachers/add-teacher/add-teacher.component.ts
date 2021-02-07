@@ -35,7 +35,7 @@ export class AddTeacherComponent implements OnInit {
         this.toastrService.success("Enseignant ajouté avec succées!");
       },
       err => {
-        this.toastrService.error("Echec de l'ajout de l'étudiant");
+        this.toastrService.error("Echec de l'ajout de l'enseignant");
       }
     );
   }

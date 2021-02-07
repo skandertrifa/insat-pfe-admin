@@ -1,6 +1,6 @@
 
-      <div class="container-fluid">
-  
+      <div class="w-75 mx-auto px-5">
+
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
             <h4 class="c-grey-900 mB-20">Annee</h4>
 <form #form="ngForm">
@@ -8,36 +8,35 @@
     <label for="anneeExistante">Sélectionner une annee deja existante</label>
     <ng-select  id="anneeExistante" [(ngModel)]="selectedAnnee" name="selectedAnnee">
       <ng-option *ngFor="let annee of annees" [value]="annee">{{annee.annee}}</ng-option>
-     
+
     </ng-select>
   </div>
     <div class="form-group">
       <label for="annee">année</label>
-      <input type="number" class="form-control" id="annee"  
+      <input type="number" class="form-control" id="annee"
       min=2000
       placeholder="Annee (entier)" [(ngModel)]="annee.annee" name="annee" #anneeInput="ngModel">
 
     </div>
     <div class="container">
-    <div class="row justify-content-md-center">
-      
-    <button type="submit" class="btn btn-primary" (click)="createAnnee()">Creer une nouvelle année</button>
-  
-  
+    <div class="text-center align-items-center justify-content-center">
+<div class="my-2">
+    <button type="submit" class="btn btn-primary mx-auto" (click)="createAnnee()">Creer une nouvelle année</button>
+  </div>
 
-  
-    <button type="submit" class="btn btn-warning" (click)="modifyAnnee()">Modifier l'année sélectionnée</button>
-  
-  
 
-    
+<div class="my-2">
+    <button type="submit" class="btn btn-success" (click)="modifyAnnee()">Confirmer la modification de l'année sélectionnée</button>
+  </div>
+
+
+<div class="my-2">
     <button type="submit" class="btn btn-danger" (click)="deleteAnnee()">Supprimer l'année sélectionnée</button>
-  
+  </div>
     </div>
   </div>
-  
+
   </form>
 
   </div>
   </div>
-  

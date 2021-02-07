@@ -1,60 +1,59 @@
 
-      <div class="container-fluid">
-  
+      <div class="w-75 mx-auto px-5">
+
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
             <h4 class="c-grey-900 mB-20">Session</h4>
 <form #form="ngForm" >
   <div class="form-group">
     <label for="sessionExistante">Sélectionner une session deja existante</label>
-    <ng-select id="sessionExistante" [(ngModel)]="selectedSession" 
+    <ng-select id="sessionExistante" [(ngModel)]="selectedSession"
     name="selectedSession" (change)="updateForm()">
       <ng-option *ngFor="let session of sessions" [value]="session">{{session.name}}</ng-option>
-     
+
     </ng-select>
   </div>
     <div class="form-group">
       <label for="name">Nom de session</label>
-      <input type="text" class="form-control" id="name" 
+      <input type="text" class="form-control" id="name"
       placeholder="Nom de session" [(ngModel)]="session.name" name="name">
     </div>
     <div class="form-group">
         <label for="dataDebut">Date de début de session</label>
-      <input type="date" class="form-control" id="dateDebut" 
+      <input type="date" class="form-control" id="dateDebut"
       placeholder="Date de debut" [(ngModel)]="session.dateDebut" name="dateDebut">
     </div>
       <div class="form-group">
         <label for="dateFin">Date de fin de session</label>
-      <input type="date" class="form-control" id="dateFin" 
+      <input type="date" class="form-control" id="dateFin"
       placeholder="Date de fin" [(ngModel)]="session.dateFin" name="dateFin">
       </div>
       <div class="form-group">
         <label for="annee">Annee de session</label>
-      <ng-select id="annee" [(ngModel)]="selectedAnnee" 
+      <ng-select id="annee" [(ngModel)]="selectedAnnee"
       name="annee">
         <ng-option *ngFor="let annee of annees" [value]="annee">{{annee.annee}}</ng-option>
-       
+
       </ng-select>
     </div>
     <div class="container">
-    <div class="row justify-content-md-center">
-      
+    <div class="text-center">
+<div class="my-2">
     <button type="submit" class="btn btn-primary" (click)="createSession()">Creer une nouvelle session</button>
-  
-  
+  </div>
 
-  
-    <button type="submit" class="btn btn-warning" (click)="modifySession()">Modifier la session sélectionnée</button>
-  
-  
 
-    
+<div class="my-2">
+    <button type="submit" class="btn btn-success" (click)="modifySession()">Confirmer la modification de la session sélectionnée</button>
+  </div>
+
+
+<div class="my-2">
     <button type="submit" class="btn btn-danger" (click)="deleteSession()">Supprimer la session sélectionnée</button>
-  
+  </div>
     </div>
   </div>
-  
+
   </form>
 
   </div>
   </div>
-  

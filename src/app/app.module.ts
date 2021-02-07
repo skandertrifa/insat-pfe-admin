@@ -36,6 +36,7 @@ import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher
 import { DeleteStudentComponent } from './students/delete-student/delete-student.component';
 import { SortDirective } from './directive/sort.directive';
 import { NgDialogAnimationService } from 'ng-dialog-animation';
+import { AddTeacherExcelComponent } from './teachers/add-teacher-excel/add-teacher-excel.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { NgDialogAnimationService } from 'ng-dialog-animation';
     DeleteTeacherComponent,
     DeleteStudentComponent,
     SortDirective,
+    AddTeacherExcelComponent,
   ],
   imports: [
     CommonModule,
