@@ -15,6 +15,38 @@ import { DeleteStudentComponent } from './delete-student/delete-student.componen
 export class StudentsComponent implements OnInit {
   private file: File;
 
+  sortColumns = [
+    {
+    name: "cin",
+    sort: ""
+    },
+    {
+    name: "filiere",
+    sort: ""
+    },
+    {
+    name: "email",
+    sort: ""
+    },
+    {
+    name: "prenom",
+    sort: ""
+    },
+    {
+      name: "nom",
+      sort: ""
+    },
+    {
+      name: "sujet",
+      sort: ""
+    },
+  ];
+
+  sortColumn = {
+    name: "",
+    sort: ""
+  };
+
   studentUpdate: Student;
 
   selectedLimit: number;
@@ -32,7 +64,7 @@ export class StudentsComponent implements OnInit {
   totalPages :number;
   currentPage :number;
 
-  students: Student[];
+  students: Array<Student>;
   searchString= "";
   modalAddStudentManually = false;
   modalAddStudentExcel = false;
@@ -44,9 +76,12 @@ export class StudentsComponent implements OnInit {
     private router: Router,
     private toastrService: ToastrService,
     public dialog: MatDialog
-  ) { }
+  ) {
+    this.students = new Array<Student>();
+  }
 
   ngOnInit(): void {
+    //this.students = new Array<Student>();
     this.route.queryParams.subscribe((params) => {
       this.selectedLimit = params.limit;
       this.getStudentsPaginated(+params.page,+params.limit);
@@ -92,9 +127,31 @@ export class StudentsComponent implements OnInit {
         });
     }
     getStudentsPaginated(page: number,limit: number){
+
       this.studentService.getStudentsPaginated(page,limit).subscribe(
         (response) => {
-          this.students = response.items;
+          console.log(response.items);
+          //this.students = response.items;
+          let i = 0;
+          this.students = new Array<Student>();
+          response.items.forEach(element => {
+            //let student = new Student();
+            //console.log(student);
+
+            this.students[i] = new Student();
+            this.students[i].cin = element.cin;
+            this.students[i].filiere =  element.filiere;
+            this.students[i].id = element.id;
+            this.students[i].idEtudiant = element.idEtudiant;
+            this.students[i].prenom = element.userDetails.prenom;
+            this.students[i].nom = element.userDetails.nom;
+            this.students[i].email = element.userDetails.email;
+            //this.students.push(student);
+            i++;
+            if (i == 9){
+              console.log(this.students)
+            }
+          });
           //links
           this.firstPage = response.links.first;
           this.lastPage = response.links.last;
@@ -209,6 +266,35 @@ export class StudentsComponent implements OnInit {
       this.handleUpdateStudentManually();
 
     }
+
+    changeSortColumn(name: string){
+    //   if ( this.sortColumn.name === name ){
+    //     this.sortColumn.sort = this.sortColumn.sort === "asc" ? "desc" : "asc"
+    //   }
+    //   else{
+    //     this.sortColumn.name = name;
+    //     this.sortColumn.sort = "desc";
+    // }
+    // find the column
+    //const sortColumns = [...this.sortColumns];
+    let selectedColumn = this.sortColumns.filter( column => column.name === name )[0];
+    console.log(selectedColumn);
+    let otherColumns = this.sortColumns.filter(column => column.name !== name);
+    if (selectedColumn.sort === ""){
+      selectedColumn.sort = "desc";
+    }
+    else if (selectedColumn.sort === "desc"){
+      selectedColumn.sort = "asc";
+    }
+    else if  (selectedColumn.sort === "asc"){
+      selectedColumn.sort = "desc";
+    }
+    console.log(selectedColumn);
+    this.sortColumn = selectedColumn;
+    otherColumns.push(selectedColumn);
+    this.sortColumns = otherColumns;
+
+  }
 
 
 

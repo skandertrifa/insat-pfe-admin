@@ -34,6 +34,7 @@ import { AddTeacherComponent } from './teachers/add-teacher/add-teacher.componen
 import { EditTeacherComponent } from './teachers/edit-teacher/edit-teacher.component';
 import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher.component';
 import { DeleteStudentComponent } from './students/delete-student/delete-student.component';
+import { SortDirective } from './directive/sort.directive';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { DeleteStudentComponent } from './students/delete-student/delete-student
     EditTeacherComponent,
     DeleteTeacherComponent,
     DeleteStudentComponent,
+    SortDirective,
   ],
   imports: [
     CommonModule,
