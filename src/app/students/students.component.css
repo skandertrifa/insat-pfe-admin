@@ -47,6 +47,10 @@
     opacity: 0;
   }
 }
+th {
+  cursor: pointer;
+}
+
 th,
 td {
   text-align: center;
