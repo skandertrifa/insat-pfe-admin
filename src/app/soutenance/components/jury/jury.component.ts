@@ -28,7 +28,6 @@ export class JuryComponent implements OnInit {
 
   checkExistance(object) : boolean
   {
-<<<<<<< HEAD
     
     if (object["president"] ===null)
       return false
@@ -38,13 +37,6 @@ export class JuryComponent implements OnInit {
     if (object["members"][1] ===null)
       return false
     
-=======
-    for (let feature in object){
-
-      if (object[feature] ===null)
-        return false
-    }
->>>>>>> f2c9e5422ca2f4833b95dc0d1c404f8af84feb75
     return true
 
   }
@@ -186,24 +178,12 @@ export class JuryComponent implements OnInit {
 
 
     }
-<<<<<<< HEAD
     
     
     
     
     
     
-=======
-
-    console.log("selected jury : ",this.selectedJury)
-    console.log("selected president : ",this.selectedPresident)
-    console.log("selected member 0 : ",this.selectedMembers[0])
-    console.log("selected member 1 : ",this.selectedMembers[1])
-
-
-
-
->>>>>>> f2c9e5422ca2f4833b95dc0d1c404f8af84feb75
   }
 
 
