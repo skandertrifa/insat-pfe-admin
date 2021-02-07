@@ -35,6 +35,7 @@ import { EditTeacherComponent } from './teachers/edit-teacher/edit-teacher.compo
 import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher.component';
 import { DeleteStudentComponent } from './students/delete-student/delete-student.component';
 import { SortDirective } from './directive/sort.directive';
+import { NgDialogAnimationService } from 'ng-dialog-animation';
 
 
 @NgModule({
@@ -76,7 +77,9 @@ import { SortDirective } from './directive/sort.directive';
     SoutenanceModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    NgDialogAnimationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

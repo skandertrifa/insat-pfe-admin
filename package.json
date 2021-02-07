@@ -38,6 +38,7 @@
     "font-awesome": "^4.7.0",
     "jwt-decode": "^3.1.2",
     "nestjs-typeorm-paginate": "^2.3.1",
+    "ng-dialog-animation": "^9.0.4",
     "ng2-search-filter": "^0.5.1",
     "ngx-skycons": "^1.2.2",
     "ngx-toastr": "^13.2.0",
