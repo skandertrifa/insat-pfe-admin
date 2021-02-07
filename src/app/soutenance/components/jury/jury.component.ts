@@ -14,7 +14,7 @@ import { JuryValidation } from '../../enums/jury-validation.enum';
 })
 export class JuryComponent implements OnInit {
   enseignants : Enseignant[] = []
-  selectedPresident : Enseignant
+  selectedPresident : Enseignant=null
   selectedMembers : Enseignant[] = [null,null]
   juries : Jury[] = []
   selectedJury : Jury
@@ -28,11 +28,15 @@ export class JuryComponent implements OnInit {
 
   checkExistance(object) : boolean
   {
-    for (let feature in object){
+    
+    if (object["president"] ===null)
+      return false
+    if (object["members"][0] ===null)
+      return false
       
-      if (object[feature] ===null)
-        return false
-    }
+    if (object["members"][1] ===null)
+      return false
+    
     return true
 
   }
@@ -80,14 +84,18 @@ export class JuryComponent implements OnInit {
   }
 
   getJuryForm(){
-    this.jury["president"]=this.selectedPresident.id
-    this.jury["members"][0]=this.selectedMembers[0].id
-    this.jury["members"][1]=this.selectedMembers[1].id
+    if(this.selectedPresident!=null && this.selectedPresident!=undefined )
+      this.jury["president"]=this.selectedPresident.id
+    if(this.selectedMembers[0]!=null && this.selectedMembers[0]!=undefined )
+      this.jury["members"][0]=this.selectedMembers[0]?.id
+    if(this.selectedMembers[1]!=null && this.selectedMembers[1]!=undefined )
+      this.jury["members"][1]=this.selectedMembers[1]?.id
     return this.jury
   }
   createJury(){
     this.jury=this.getJuryForm()
     if (!this.checkExistance(this.jury)){
+      this.toastrService.error("Veuillez remplir tous les champs");
       return ;
     }
     
@@ -171,10 +179,7 @@ export class JuryComponent implements OnInit {
 
     }
     
-    console.log("selected jury : ",this.selectedJury)
-    console.log("selected president : ",this.selectedPresident)
-    console.log("selected member 0 : ",this.selectedMembers[0])
-    console.log("selected member 1 : ",this.selectedMembers[1])
+    
     
     
     
