@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Student } from '../models/student';
 import { MatDialog } from '@angular/material/dialog';
+import { NgDialogAnimationService } from 'ng-dialog-animation';
 
 @Component({
   selector: 'app-teachers',
@@ -46,7 +47,7 @@ export class TeachersComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastrService: ToastrService,
-    public dialog: MatDialog
+    public dialog: NgDialogAnimationService
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +59,7 @@ export class TeachersComponent implements OnInit {
     // handleClick ajouter etudiant manuellement
     handleAddStudentManually(limit): void{
       const dialogRef = this.dialog.open(AddTeacherComponent, {
-
+        animation: { to: "bottom" },
         width: '600px',
         panelClass: 'custom-dialog-container'
       });
@@ -123,7 +124,7 @@ export class TeachersComponent implements OnInit {
     }
     handleDeleteStudent(id: number, page: number, limit: number): void{
       const dialogRef = this.dialog.open(DeleteTeacherComponent, {
-
+        animation: { to: "left" },
         width: '600px',
         panelClass: 'custom-dialog-container',
         data: id
@@ -168,7 +169,7 @@ export class TeachersComponent implements OnInit {
 
     handleUpdateStudentManuallyButton(teacher, page, limit): void{
       const dialogRef = this.dialog.open(EditTeacherComponent, {
-
+        animation: { to: "bottom" },
         width: '600px',
         panelClass: 'custom-dialog-container',
         data: teacher

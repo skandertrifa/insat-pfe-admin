@@ -26,30 +26,30 @@ export class JuryComponent implements OnInit {
   checkExistance(object) : boolean
   {
     for (let feature in object){
-      
+
       if (object[feature] ===null)
         return false
     }
     return true
 
   }
-  
+
   loadJuries(){
     this.juryService.getJuries().subscribe(
       (response) => {
-        this.juries = response;        
+        this.juries = response;
       })
   }
   loadEnseignants(){
     this.enseignantService.getEnseignants().subscribe(
       (response) => {
-        this.enseignants = response;        
+        this.enseignants = response;
       })
   }
 
 
   ngOnInit(): void {
-    
+
     this.loadJuries()
     this.loadEnseignants()
   }
@@ -61,18 +61,15 @@ export class JuryComponent implements OnInit {
     return this.jury
   }
   createJury(){
-    if (!this.checkExistance(this.jury)){
-      return ;
-    }
     this.juryService.createJury(this.getJuryForm()).subscribe(
       (response) =>{
         this.loadJuries()
       }
-    )   
+    )
   }
 
   modifyJury(){
-    
+
     const modifyJury :Partial<CreateJury>={}
     for (let feature in this.jury)
     {
@@ -93,24 +90,24 @@ export class JuryComponent implements OnInit {
       (response) =>{
         this.loadJuries()
       }
-    )   
+    )
   }
-  
+
   deleteJury(){
-    
+
     this.juryService.deleteJury(this.selectedJury.id).subscribe(
       (response) =>{
         this.loadJuries()
       }
-    )   
+    )
   }
-  
+
 
   updateForm(){
     this.jury["president"]=this.selectedJury.president.id
     this.jury["members"][0]=this.selectedJury.members[0].id
     this.jury["members"][1]=this.selectedJury.members[1].id
-    
+
     for(let enseignant of this.enseignants){
       if (enseignant.id===this.selectedJury.president.id){
         this.selectedPresident=enseignant
@@ -121,21 +118,21 @@ export class JuryComponent implements OnInit {
       if (enseignant.id===this.selectedJury.members[1].id){
         this.selectedMembers[1]=enseignant
       }
-    
+
 
     }
-    
+
     console.log("selected jury : ",this.selectedJury)
     console.log("selected president : ",this.selectedPresident)
     console.log("selected member 0 : ",this.selectedMembers[0])
     console.log("selected member 1 : ",this.selectedMembers[1])
-    
-    
-    
-    
+
+
+
+
   }
-  
-  
+
+
 
 
 }

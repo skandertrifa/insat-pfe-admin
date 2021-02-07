@@ -33,6 +33,7 @@ import { TeachersComponent } from './teachers/teachers.component';
 import { AddTeacherComponent } from './teachers/add-teacher/add-teacher.component';
 import { EditTeacherComponent } from './teachers/edit-teacher/edit-teacher.component';
 import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher.component';
+import { NgDialogAnimationService } from 'ng-dialog-animation';
 
 
 @NgModule({
@@ -72,7 +73,9 @@ import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher
     SoutenanceModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    NgDialogAnimationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
