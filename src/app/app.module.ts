@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +36,7 @@ import { DeleteTeacherComponent } from './teachers/delete-teacher/delete-teacher
 import { DeleteStudentComponent } from './students/delete-student/delete-student.component';
 import { SortDirective } from './directive/sort.directive';
 import { NgDialogAnimationService } from 'ng-dialog-animation';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -78,8 +79,14 @@ import { NgDialogAnimationService } from 'ng-dialog-animation';
     MatInputModule
   ],
   providers: [
-    NgDialogAnimationService
+    NgDialogAnimationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
