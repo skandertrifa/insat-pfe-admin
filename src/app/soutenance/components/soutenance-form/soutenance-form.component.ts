@@ -18,13 +18,13 @@ import { faPrint } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./soutenance-form.component.css']
 })
 export class SoutenanceFormComponent implements OnInit {
-  
+
   @Input()
   role: string = "creer";
 
   @Input()
   id?: number ;
-  
+
   sessions : Session[] = []
   selectedSession : Session
   salles : Salle[] = []
@@ -54,7 +54,7 @@ export class SoutenanceFormComponent implements OnInit {
   checkExistance(object) : boolean
   {
     for (let feature in object){
-      
+
       if (object[feature] ===null || object[feature] ===undefined )
         return false
     }
@@ -64,7 +64,7 @@ export class SoutenanceFormComponent implements OnInit {
   loadSoutenanceById(){
     this.soutenanceService.getSoutenance(this.id).subscribe(
       (response) => {
-        this.soutenance.titre = response.titre;        
+        this.soutenance.titre = response.titre;
         this.soutenance.dateDePassage = response.dateDePassage;
 
         for(let session of this.sessions){
@@ -81,12 +81,12 @@ export class SoutenanceFormComponent implements OnInit {
           if (response.jury.id===jury.id)
            this.selectedJury = jury;
         }
-      
+
         for(let sujet of this.sujets){
           if (response.sujet.id===sujet.id)
           this.selectedSujet = sujet;
         }
-        
+
 
       })
   }
@@ -94,26 +94,26 @@ export class SoutenanceFormComponent implements OnInit {
   loadSessions(){
     this.sessionService.getSessions().subscribe(
       (response) => {
-        this.sessions = response;        
+        this.sessions = response;
       })
   }
 
   loadSalles(){
     this.salleService.getSalles().subscribe(
       (response) => {
-        this.salles = response;        
+        this.salles = response;
       })
   }
   loadJuries(){
     this.juryService.getJuries().subscribe(
       (response) => {
-        this.juries = response;        
+        this.juries = response;
       })
   }
   loadSujets(){
     this.sujetService.getSujets().subscribe(
       (response) => {
-        this.sujets = response.items;        
+        this.sujets = response.items;
       })
   }
 
@@ -121,8 +121,8 @@ export class SoutenanceFormComponent implements OnInit {
 
     if(soutenance.dateDePassage<=this.selectedSession.dateDebut  ||
         soutenance.dateDePassage>=this.selectedSession.dateFin)
-        return SoutenanceValidation.DateDePassageError 
-    
+        return SoutenanceValidation.DateDePassageError
+
     return SoutenanceValidation.valid
 
   }
@@ -139,7 +139,7 @@ export class SoutenanceFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.loadSessions()
     this.loadSalles()
     this.loadJuries()
@@ -162,32 +162,32 @@ export class SoutenanceFormComponent implements OnInit {
       this.toastrService.error("Veuillez Entrer tous les champs");
       return false;
     }
-    
+
     const validForm =this.validateForm(this.soutenance)
     if(!this.validation(validForm))
       return false;
-
+    console.log(this.getSoutenanceForm())
     let check=false
     this.soutenanceService.createSoutenance(this.getSoutenanceForm()).subscribe(
       (response) =>{
         check=true;
         this.toastrService.success("La soutenance est Crée avec succès");
         this.navigate("../")
-        
-        
+
+
       },
       (erreur) => {
         check=false
         this.toastrService.error("Erreur");
-        
-        
+
+
       }
     )
     return check
   }
 
   modifySoutenance() : boolean{
-    
+
     const modifySoutenance :Partial<CreateSoutenance>={}
     for (let feature in this.getSoutenanceForm())
     {
@@ -198,7 +198,7 @@ export class SoutenanceFormComponent implements OnInit {
     const validForm =this.validateForm(this.soutenance)
     if(!this.validation(validForm))
       return false;
-      
+
     this.soutenanceService.modifySoutenance(modifySoutenance,this.id).subscribe(
       (response) =>{
         this.toastrService.success("La soutenance est Modifiée avec succès");
@@ -210,11 +210,11 @@ export class SoutenanceFormComponent implements OnInit {
         return false
       }
     )
-    return true   
+    return true
   }
-  
+
   deleteSoutenance() : boolean{
-    
+
     this.soutenanceService.deleteSoutenance(this.id).subscribe(
       (response) =>{
         this.toastrService.success("La soutenance est Supprimée avec succès");
@@ -225,7 +225,7 @@ export class SoutenanceFormComponent implements OnInit {
         return false
       }
     )
-    return true   
+    return true
   }
   navigate(relativeUrl : string){
     this.router.navigate([relativeUrl],{relativeTo: this.route})
@@ -233,17 +233,17 @@ export class SoutenanceFormComponent implements OnInit {
   submit(){
     if (this.role === "creer" ){
       this.createSoutenance()
-        
+
     }
     else if (this.role === "modifier" ){
 
       this.modifySoutenance()
-        
+
     }
   }
-  
 
-  
+
+
 
 
 }

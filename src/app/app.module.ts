@@ -37,6 +37,7 @@ import { DeleteStudentComponent } from './students/delete-student/delete-student
 import { SortDirective } from './directive/sort.directive';
 import { NgDialogAnimationService } from 'ng-dialog-animation';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AddTeacherExcelComponent } from './teachers/add-teacher-excel/add-teacher-excel.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     DeleteTeacherComponent,
     DeleteStudentComponent,
     SortDirective,
+    AddTeacherExcelComponent,
   ],
   imports: [
     CommonModule,

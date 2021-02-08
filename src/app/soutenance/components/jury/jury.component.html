@@ -1,71 +1,70 @@
 
-      <div class="container-fluid">
-  
+      <div class="w-75 mx-auto px-5">
+
         <div class="bgc-white bd bdrs-3 p-20 mB-20">
             <h4 class="c-grey-900 mB-20">Jury</h4>
 <form #form="ngForm">
   <div class="form-group">
     <label for="juryExistante">Sélectionner une jury deja existante</label>
-    <ng-select id="juryExistante" [(ngModel)]="selectedJury" 
+    <ng-select id="juryExistante" [(ngModel)]="selectedJury"
     name="selectedJury" (change)="updateForm()">
       <ng-option *ngFor="let jury of juries" [value]="jury">
         {{jury.president.userDetails.nom}} {{jury.president.userDetails.prenom}} : President |
         {{jury.members[0].userDetails.nom}} {{jury.members[0].userDetails.prenom}} : Membre 1 |
         {{jury.members[1].userDetails.nom}} {{jury.members[1].userDetails.prenom}} : Membre 2
       </ng-option>
-     
+
     </ng-select>
-    
+
   </div>
-    
+
       <div class="form-group">
         <label for="president">President de jury</label>
-      <ng-select id="president" [(ngModel)]="selectedPresident" 
+      <ng-select id="president" [(ngModel)]="selectedPresident"
       name="president" >
         <ng-option *ngFor="let enseignant of enseignants" [value]="enseignant">{{enseignant.userDetails.nom}} {{enseignant.userDetails.prenom}}</ng-option>
-       
+
       </ng-select>
     </div>
 
     <div class="form-group">
         <label for="member1">Membre 1 de jury</label>
-      <ng-select id="member1" [(ngModel)]="selectedMembers[0]" 
+      <ng-select id="member1" [(ngModel)]="selectedMembers[0]"
       name="member1" >
         <ng-option *ngFor="let enseignant of enseignants" [value]="enseignant">{{enseignant.userDetails.nom}} {{enseignant.userDetails.prenom}}</ng-option>
-       
+
       </ng-select>
     </div>
 
     <div class="form-group">
         <label for="member2">Membre 2 de jury</label>
-      <ng-select id="member2" [(ngModel)]="selectedMembers[1]" 
+      <ng-select id="member2" [(ngModel)]="selectedMembers[1]"
       name="member2" >
         <ng-option *ngFor="let enseignant of enseignants" [value]="enseignant">{{enseignant.userDetails.nom}} {{enseignant.userDetails.prenom}}</ng-option>
-       
+
       </ng-select>
     </div>
 
-    
+
     <div class="container">
-    <div class="row justify-content-md-center">
-      
+    <div class="text-center">
+      <div class="my-2">
     <button type="submit" class="btn btn-primary" (click)="createJury()">Creer une nouvelle jury</button>
-  
-  
+  </div>
 
-  
-    <button type="submit" class="btn btn-warning" (click)="modifyJury()">Modifier la jury sélectionnée</button>
-  
-  
 
-    
+  <div class="my-2">
+    <button type="submit" class="btn btn-success" (click)="modifyJury()">Confirmer la modification de la jury sélectionnée</button>
+  </div>
+
+
+    <div class="my-2">
     <button type="submit" class="btn btn-danger" (click)="deleteJury()">Supprimer la jury sélectionnée</button>
-  
+  </div>
     </div>
   </div>
-  
+
   </form>
 
   </div>
   </div>
-  

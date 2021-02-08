@@ -127,7 +127,10 @@ export class StudentsComponent implements OnInit {
         });
     }
     getStudentsPaginated(page: number,limit: number){
-
+      this.sortColumn = {
+        name: "",
+        sort: ""
+      };
       this.studentService.getStudentsPaginated(page,limit).subscribe(
         (response) => {
           console.log(response.items);
